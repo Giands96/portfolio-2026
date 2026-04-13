@@ -1,0 +1,69 @@
+---
+// Tu sección de imports aquí
+---
+
+<section class="relative w-full h-screen flex items-center bg-white text-black overflow-hidden px-8 md:px-16">
+  
+  <div class="absolute inset-0 opacity-10  bg-cover bg-center pointer-events-none"></div>
+
+  <div id="dynamic-island" class="absolute top-8 left-1/2 -translate-x-1/2 z-50">
+    <div id="dot" class="w-[150px] h-[40px] rounded-full bg-[#1a1a1a] hover:w-[320px] transition-all duration-500 ease-in-out"></div>
+  </div>
+
+  <div class="z-10 hero-content w-full container mx-auto flex flex-col justify-center">
+    
+    <p class="text-3xl md:text-5xl italic font-serif text-gray-800 mb-2">
+      Hola, Soy Axel
+    </p>
+    
+    <h1 id="hero-title" class="text-[4rem] md:text-[9rem] font-sans-akira uppercase tracking-tighter leading-[0.85]">
+      Full Stack <br /> Developer
+    </h1>
+    
+    <p class="text-xl md:text-2xl mt-8 font-serif italic text-gray-600">
+      UX / UI y aplicaciones modernas
+    </p>
+    
+  </div>
+
+  <div id="my-person" class="absolute top-[45%] right-10 flex flex-col items-center gap-2 z-20">
+    <span class="font-serif italic text-2xl text-gray-800 text-center leading-tight">
+      Hey! estoy <br/> aquí :)
+    </span>
+    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" class="ml-10 text-gray-800">
+      <path d="M10 10 Q 50 30 80 80" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M65 85 L 80 80 L 85 65" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <button class="absolute top-[55%] -right-12 w-24 h-24 bg-[#1a1a1a] rounded-full text-white flex items-center justify-start pl-4 hover:-translate-x-4 transition-transform duration-300 cursor-pointer z-30">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+  </button>
+
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from("#hero-title", {
+    scrollTrigger: {
+      trigger: "#hero-title",
+      start: "top 80%",
+      end: "bottom 60%",
+      scrub: true,
+    },
+    y: 100,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out",
+    markers: true
+  });
+
+
+</script>

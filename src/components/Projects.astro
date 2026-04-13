@@ -1,0 +1,65 @@
+---
+// src/components/Projects.astro
+const proyectos = [
+  {
+    id: "01",
+    title: "CHAT APP",
+    description: "Chat App desarrollado con el Stack MERN, permitiendo a los usuarios registrarse, iniciar sesión y enviar mensajes en tiempo real.",
+  },
+  {
+    id: "02",
+    title: "WASIQ",
+    description: "Plataforma inmobiliaria que permite gestionar propiedades, conectar compradores y vendedores, y optimizar el proceso de publicación y búsqueda.",
+  }
+];
+---
+
+<section class="bg-[#1a1a1a] text-white py-24 px-8 md:px-16 min-h-screen">
+  <h2 class="text-3xl md:text-4xl font-black text-center mb-20 uppercase tracking-widest">
+    Mis Proyectos
+  </h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto project-grid">
+    {proyectos.map((proyecto) => (
+      <article class="project-card group cursor-pointer">
+        <span class="text-3xl font-black mb-6 block text-gray-400">{proyecto.id}</span>
+        
+        <div class="overflow-hidden rounded-lg mb-6 bg-zinc-800">
+          <img 
+            src={""} 
+            alt={`Captura del proyecto ${proyecto.title}`} 
+            class="w-full h-60 object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-in-out" 
+          />
+        </div>
+        
+        <h3 class="text-2xl font-black uppercase mb-3">{proyecto.title}</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4 min-h-[80px]">
+          {proyecto.description}
+        </p>
+        
+        <div class="flex gap-3 text-gray-500">
+          <span class="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center text-xs">⚙️</span>
+          <span class="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center text-xs">⚛️</span>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.from(".project-card", {
+    scrollTrigger: {
+      trigger: ".project-grid",
+      start: "top 80%",
+    },
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: "power2.out"
+  });
+</script>
