@@ -1,5 +1,5 @@
 ---
-import AboutMe from "../pages/aboutMe.astro"
+const AboutMe = "./about-me"
 
 ---
 
@@ -10,14 +10,14 @@ import AboutMe from "../pages/aboutMe.astro"
   <div id="dynamic-island" class="fixed top-8 left-1/2 -translate-x-1/2 z-50 lg:flex hidden">
     <div
       id="dot"
-      class="w-[150px] h-10 rounded-full bg-black transition-all duration-500 ease-in-out overflow-hidden-+"
+      class="w-37.5 h-10 rounded-full bg-black transition-all duration-500 ease-in-out overflow-hidden-+"
     >
       <div
         id="links"
         class="hover:w-full h-full flex items-center justify-center gap-6 px-4 opacity-0 transition-opacity duration-300"
       >
         <a class="text-white font-sans-akira hover:text-neutral-400 whitespace-nowrap" href="#">Inicio</a>
-        <a class="text-white font-sans-akira hover:text-neutral-400 whitespace-nowrap" href="/aboutMe">Sobre mí</a>
+        <a class="text-white font-sans-akira hover:text-neutral-400 whitespace-nowrap"href={AboutMe}>Sobre mi</a>
         <a class="text-white font-sans-akira hover:text-neutral-400 whitespace-nowrap" href="/projects">Proyectos</a>
         <a class="text-white font-sans-akira hover:text-neutral-400 whitespace-nowrap" href="/contact">Contacto</a>
       </div>
@@ -25,18 +25,18 @@ import AboutMe from "../pages/aboutMe.astro"
   </div>
 
   <div class="hero-content w-full container mx-auto flex flex-col justify-center">
-    <p id="hi-im" class="text-3xl md:text-5xl italic font-serif text-gray-800 mb-2">
+    <p id="hi-im" class="text-3xl md:text-5xl italic font-serif text-gray-800 mb-2 opacity-0">
       Hola, Soy Axel
     </p>
 
     <h1
       id="hero-title"
-      class="text-[4rem] md:text-[9rem] font-sans-akira uppercase tracking-tighter leading-[0.85]"
+      class="text-[4rem] md:text-[9rem] font-sans-akira uppercase tracking-tighter leading-[0.85] opacity-0"
     >
       Full Stack <br /> Developer
     </h1>
 
-    <p id="subtitle" class="text-xl font-semibold md:text-2xl mt-8 font-serif italic text-gray-600">
+    <p id="subtitle" class="text-xl font-semibold md:text-2xl mt-8 font-serif italic text-gray-600 opacity-0">
       UX / UI
     </p>
   </div>
@@ -150,14 +150,16 @@ import AboutMe from "../pages/aboutMe.astro"
     }
   });
 
+const title = document.querySelector<HTMLElement>("#hero-title");
 
-  gsap.set("#hero-title", {
+
+  gsap.set(title, {
     y: -50,
     opacity: 0
   });
 
   // Aparición inicial del título
-  gsap.to("#hero-title", {
+  gsap.to(title, {
     y: 0,
     opacity: 1,
     duration: 1,
@@ -165,7 +167,7 @@ import AboutMe from "../pages/aboutMe.astro"
     ease: "power2.out",
     onComplete: () => {
       // Fade al hacer scroll, y reaparece al volver arriba
-      gsap.to("#hero-title", {
+      gsap.to(title, {
         y: 50,
         opacity: 0,
         ease: "none",

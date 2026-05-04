@@ -3,24 +3,12 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Projects from '../components/Projects.astro';
-
-
+import Welcome from '../components/Welcome.astro';
 ---
 <Layout>
   <main class="antialiased">
     <Hero />
     <Projects />
+    <Welcome />
   </main>
-
-  <script src="https://unpkg.com/lenis@1.3.21/dist/lenis.min.js">
-  const lenis = new Lenis({
-    autoRaf: true,
-
-  });
-
-  lenis.on('scroll', (e) => {
-    console.log(e);
-  });
-  </script> 
-  
 </Layout>
