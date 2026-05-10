@@ -1,0 +1,61 @@
+---
+
+---
+
+<form class="flex flex-col gap-6" method="POST" action="">
+    <div class="flex">
+        <div class="w-1/2">
+            <label for="name" class="block text-md font-sans-inter text-neutral-50">
+                Nombres
+            </label>
+            <input 
+                type="text" 
+                id="name" 
+                name="name"
+                placeholder="Ingresa tus nombres"
+                class="mt-1 block w-full border-b-2 font-sans-inter  border-neutral-400 focus:border-white bg-transparent ring-0 focus:ring-0 focus:outline-none shadow-sm py-2 sm:text-sm">
+        </div>
+        
+        <div class="w-1/2 ml-4">
+            <label for="email" class="block text-md font-sans-inter  text-neutral-50">
+                Apellidos
+            </label>
+            <input 
+                type="text" 
+                id="lastname" 
+                name="lastname" 
+                placeholder="Ingresa tus apellidos"
+                class="mt-1 block w-full border-b-2 font-sans-inter  border-neutral-400 focus:border-white bg-transparent ring-0 focus:ring-0 focus:outline-none shadow-sm py-2 sm:text-sm">
+        </div>
+    </div>
+    <div>
+        <label for="email" class="block text-md font-sans-inter  text-neutral-50">
+            Correo Electrónico
+        </label>
+        <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="Ingresa tu correo"
+            class="mt-1 block w-full border-b-2 font-sans-inter  border-neutral-400 focus:border-white bg-transparent ring-0 focus:ring-0 focus:outline-none shadow-sm py-2 sm:text-sm">
+    </div>
+    <div>
+        <label for="message" class="block text-md font-sans-inter  text-neutral-50">
+            ¿Tienes ideas? Déjamelas aquí!
+        </label>
+        <textarea 
+            id="message" 
+            name="message" 
+            set:text=""
+            placeholder="Escribe tu mensaje"
+            class="mt-1 block w-full border-b-2 font-sans-inter  border-neutral-400 focus:border-white bg-transparent ring-0 focus:ring-0 focus:outline-none shadow-sm py-2 sm:text-sm resize-none h-32">
+        </textarea>
+    </div>
+    <div>
+        <button 
+            type="submit" 
+            class="px-6 py-2 bg-white text-black font-sans-akira hover:bg-gray-200 transition-colors duration-300 hover:cursor-pointer">
+            Enviar
+        </button>
+    </div>
+</form>
