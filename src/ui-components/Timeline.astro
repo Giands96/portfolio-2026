@@ -1,0 +1,173 @@
+---
+import LeftBox from "../ui-components/LeftBox.astro";
+import RightBox from "../ui-components/RightBox.astro";
+
+const trayectoria = [
+  {
+    number: "N. 01",
+    title: "ESTUDIOS DE COMPUTACION E INFORMATICA",
+    description:
+      "Desarrollé bases sólidas en programación, estructuras de datos y fundamentos del desarrollo de software.",
+    side: "left",
+  },
+  {
+    number: "N. 02",
+    title: "DESARROLLO FRONTEND",
+    description:
+      "Construí interfaces web responsivas utilizando HTML, CSS, JS, React y NextJS, enfocándome en UX / UI.",
+    side: "right",
+  },
+  {
+    number: "N. 03",
+    title: "DESARROLLO FULLSTACK",
+    description:
+      "Amplié mis conocimientos hacia el backend, trabajando con APIs, Autenticación con JWT, HttpOnly y Diseño de Bases de Datos.",
+    side: "left",
+  },
+  {
+    number: "N. 04",
+    title: "EXPERIENCIA Y PROYECTOS REALES",
+    description:
+      "Participé en la gestión y mejora de sitios web en entornos reales, aplicando metodologías ágiles.",
+    side: "right",
+  },
+  {
+    number: "N. 05",
+    title: "QUE SIGUE?",
+    description: "Depende de ti ;)",
+    side: "left",
+  },
+];
+---
+
+<section id="timeline" class="timeline bg-white relative z-10 overflow-hidden mb-40">
+  <div class="max-w-full mx-auto">
+    <div
+      class="sticky top-0 bg-gradient-to-b from-white via-white/95 to-transparent z-20 pt-20 pb-10"
+    >
+      <h2
+        class="text-3xl md:text-9xl font-black text-center font-sans-akira mb-20 uppercase tracking-wide text-black"
+        style="-webkit-text-stroke: 1px black; color: white;"
+      >
+        Tra<span class="text-black" style="-webkit-text-stroke: 0px;"
+          >yecto</span
+        >ria
+      </h2>
+    </div>
+
+    <div class="relative max-w-6xl mx-auto px-4" id="tabla-timeline">
+      <div
+        class="midline absolute left-1/2 top-8 w-0.5 bg-black hidden md:block -translate-x-1/2 h-0"
+      >
+      </div>
+
+      <div class="space-y-16 md:space-y-24 relative">
+        {
+          trayectoria.map((item) => {
+            const Box = item.side === "left" ? LeftBox : RightBox;
+
+            return (
+              <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center relative">
+                {/* Espacio vacío derecho si el contenido va a la derecha */}
+                {item.side === "right" && <div class="hidden md:block" />}
+                <Box
+                  number={item.number}
+                  title={item.title}
+                  description={item.description}
+                />
+                {/* Espacio vacío derecho si el contenido va a la izquierda */}
+                {item.side === "left" && <div class="hidden md:block" />}
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import Lenis from "lenis";
+
+  // Registramr plugin GSAP para reaccionar al scroll
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Configurar Lenis para el scroll nativo
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  });
+
+  // Sincronización entre Lenis y GSAP
+  // Asegura que GSAP sepa exactamente en qué pixel se encuentra Lenis
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0);
+  const trayectoriaSection = document.getElementById("timeline");
+  const allBoxes = document.querySelectorAll(".timeline-item");
+  const boxes = gsap.utils.toArray(allBoxes) as HTMLElement[];
+  const tablaTimeline = document.getElementById(
+    "tabla-timeline",
+  ) as HTMLElement;
+
+  /* const getScrollAmount = () => {
+    const tablaHeight = tablaTimeline.offsetHeight;
+    const screenHeight = window.innerHeight;
+    return -(tablaHeight - screenHeight * 0.4);
+  };
+*/
+
+  const getScrollDistance = () => {
+    const tablaHeight = tablaTimeline.offsetHeight;
+    const screenHeight = window.innerHeight;
+    return Math.max(0, tablaHeight - screenHeight * 0.9);
+  };
+  gsap.to(tablaTimeline, {
+    y: () => -getScrollDistance(), // Aplicamos el movimiento hacia arriba
+    ease: "none",
+    scrollTrigger: {
+      trigger: trayectoriaSection, // Vigilamos toda la sección
+      start: "top top", // Empieza cuando la sección toca el tope de la pantalla
+      end: () => `+=${getScrollDistance()}`, // La duración depende de qué tan larga sea la tabla
+      pin: true, // ¡Aquí es donde fijamos la sección!
+      scrub: 1, // El movimiento sigue suavemente al scroll
+      invalidateOnRefresh: true, // Recalcula si cambias el tamaño de la ventana
+      markers: false, // Ayuda visual para calibrar
+    },
+  });
+
+  // Iteramos sobre cada caja individualmente
+  boxes.forEach((box) => {
+    // gsapt.to() anima desde el estado original (CSS) HACIA los valores que pongamos aquí
+    gsap.to(box, {
+      opacity: 0, // Animamos la transparencia para que desaparezca
+      y: -60, // Lo desplazamos 60px hacia arriba mientras desaparece
+      // Configuramos cuándo debe ocurrir esta animación
+      scrollTrigger: {
+        trigger: box, // El elemento que vigila ScrollTrigger es la propia caja
+        // start: "posición_del_elemento posición_de_la_pantalla"
+        // "top 30%" -> Empieza cuando la parte superior de la caja toca el 30% de la pantalla (desde arriba)
+        start: "top 30%",
+        // end: Termina cuando la parte superior de la caja toca el 5% de la pantalla
+        end: "top 5%",
+        scrub: true, // Hace que la animación avance o retroceda según el movimiento exacto del ratón
+        markers: false, // Ponlo en 'true' temporalmente si quieres ver las líneas guías en pantalla
+      },
+    });
+  });
+
+  gsap.to(".midline", {
+    height: "100%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: trayectoriaSection,
+      start: "top top",
+      end: () => `+=${getScrollDistance()}`,
+      scrub: true,
+    },
+  });
+</script>
