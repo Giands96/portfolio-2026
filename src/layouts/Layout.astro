@@ -1,104 +1,100 @@
 ---
-import { Font } from 'astro:assets';
-import '../styles/global.css'
+import { Font } from "astro:assets";
+import "../styles/global.css";
 ---
 
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<Font cssVariable="--font-Inter" preload />
-		<Font cssVariable="--font-AkiraExpanded" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>My Portfolio - Axel</title>
-	</head>
-	<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <Font cssVariable="--font-Inter" preload />
+    <Font cssVariable="--font-AkiraExpanded" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>My Portfolio - Axel</title>
+  </head>
+  <body>
+    <div class="cursor-background"></div>
 
-		<div class="cursor-background">
+    <slot />
+    <script>
+      import Lenis from "lenis";
 
-		</div>
+      const lenis = new Lenis({ autoRaf: true });
 
+      let mouseX = 0;
+      let mouseY = 0;
+      let cursorX = 0;
+      let cursorY = 0;
+      let fadeTimeout: any;
+      let isInteractive = false; // ← Nueva variable
 
-		<slot />
-	<script>
-		import Lenis from 'lenis';
+      const cursor = document.querySelector(
+        ".cursor-background",
+      ) as HTMLElement;
 
-		const lenis = new Lenis({
-			autoRaf: true
-		});
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
 
-		let mouseX = 0;
-		let mouseY = 0;
-		let cursorX = 0;
-		let cursorY = 0;
-		let fadeTimeout: any;
- 
-		document.addEventListener('mousemove', (e) => {
+        if (!cursor) return;
 
-			mouseX = e.clientX;
-			mouseY = e.clientY;
+        // Mostrar cursor
+        cursor.style.opacity = "1";
+        clearTimeout(fadeTimeout);
+        fadeTimeout = setTimeout(() => {
+          cursor.style.opacity = "0";
+        }, 2000);
 
-			const cursor = document.querySelector('.cursor-background') as HTMLElement;
-			if (cursor) {
-				cursor.style.opacity = '1';
-				cursor.style.transition = 'opacity 1s ease-out';
-				// Reiniciar el temporizador de desvanecimiento
-				clearTimeout(fadeTimeout);
+        // Detectar elementos interactivos
+        const interactive = (e.target as HTMLElement).closest(
+          'a, button, [role="button"], input, textarea, .cursor-pointer',
+        );
 
-				// Ocultar el cursor después de 2 segundos de inactividad
-				fadeTimeout = setTimeout(() => {
-					cursor.style.opacity = '0';
-				}, 2000);
-			}
+        isInteractive = !!interactive;
+      });
 
-			
+      function animateCursor() {
+        // Suavizar movimiento
+        cursorX += (mouseX - cursorX) * 0.12;
+        cursorY += (mouseY - cursorY) * 0.12;
 
-		});
-				
+        if (cursor) {
+          const scale = isInteractive ? 1.6 : 1;
 
-		function animateCursor() {
-			// Suavizar el movimiento del cursor
-			cursorX += (mouseX - cursorX) * 0.1;
-			// Para el eje Y
-			cursorY += (mouseY - cursorY) * 0.1;
+          cursor.style.transform = `translate3d(${cursorX - 40}px, ${cursorY - 40}px, 0) scale(${scale})`;
+        }
 
-			const cursor = document.querySelector('.cursor-background') as HTMLElement;
-			if (cursor) {
-				cursor.style.transform = `translate3d(${cursorX - 45}px, ${cursorY - 45}px, 0)`;
-			}
-			requestAnimationFrame(animateCursor);
-		}
+        requestAnimationFrame(animateCursor);
+      }
 
-		animateCursor();
-
-	</script>
-	</body>
+      animateCursor();
+    </script>
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 
-	.cursor-background {
-		position: fixed;
-		top: 0;
-		left: 0;
-		opacity: 0;
-		width: 80px;
-		height: 80px;
-		border-radius: 100%;
-		pointer-events: none;
-		z-index: 9999;
-		background-color: white;
-		mix-blend-mode: difference;
-	}
-
-
+  .cursor-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    background-color: white;
+    mix-blend-mode: difference;
+    transition: transform 0.08s ease-out;
+  }
 </style>
