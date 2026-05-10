@@ -1,0 +1,32 @@
+---
+import Form from "../ui-components/Form.astro"
+---
+
+<section class="bg-footer relative z-100 p-4 h-dvh flex flex-col gap-4">
+    <div class="text-center my-16">
+        <h3
+        class="text-3xl md:text-8xl font-black text-center font-sans-akira uppercase tracking-wide text-black"
+        style="-webkit-text-stroke: 1px white; color: rgba(255, 255, 255, 0);"
+      >
+        Entonces..
+      </h3>
+      <span class="font-sans-akira text-white text-3xl md:text-8xl">
+        Cuando Empezamos?
+      </span>
+    </div>
+    <div class="grid grid-cols-2 container mx-auto text-white">
+        <div class="flex flex-col gap-6">
+            <div>
+                <span class="font-sans-akira text-3xl">Correo</span>
+                <p class="font-sans-inter text-xl">axeldelsolardev@gmail.com</p>
+            </div>
+            <div>
+                <span class="font-sans-akira text-3xl">Numero de contacto</span>
+                <p class="font-sans-inter text-xl">+51 944 888 171</p>
+            </div>
+        </div>
+        <div>
+            <Form/>
+        </div>
+    </div>
+</section>
