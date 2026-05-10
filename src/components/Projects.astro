@@ -1,118 +1,199 @@
 ---
 // src/components/Projects.astro
-const proyectos = [
+import reactlogo from "../assets/react.svg";
+import mongodb from "../assets/mongodb.svg";
+import nodejs from "../assets/nodejs02.svg";
+import express from "../assets/express.svg";
+import nextjs from "../assets/nextjs-fill.svg";
+import typescript from "../assets/typescript-16.svg";
+import postgresql from "../assets/postgresql.svg";
+import spring from "../assets/spring.svg";
+import wordpress from "../assets/wordpress.svg";
+import astro from "../assets/astro.svg";
+import tailwind from "../assets/tailwindcss.svg";
+import docker from "../assets/docker.svg";
+import elementor from "../assets/elementor.svg";
+import { Image } from "astro:assets";
+import Wasiq from "../assets/images/Wasiq.webp";
+import ADStudio from "../assets/images/adstudio.webp";
+import portfolio from "../assets/images/portfolio.webp";
+import mernChat from "../assets/images/mernchat.webp";
+
+interface Proyecto {
+  id: string;
+  title: string;
+  imagen: any;
+  description: string;
+  url: string;
+  url_svg: { src: string }[];
+}
+
+const proyectos: Proyecto[] = [
   {
     id: "01",
     title: "CHAT APP",
-    description: "Chat App desarrollado con el Stack MERN, permitiendo a los usuarios registrarse, iniciar sesión y enviar mensajes en tiempo real.",
+    imagen: mernChat,
+    url: "https://mern-chat-2p49.onrender.com/",
+    description:
+      "Chat App desarrollado con el Stack MERN (MongoDB, Express, React, Node.js), permitiendo a los usuarios registrarse, iniciar sesión y enviar mensajes en tiempo real.",
+    url_svg: [mongodb, express, reactlogo, nodejs],
   },
   {
     id: "02",
     title: "WASIQ",
-    description: "Plataforma inmobiliaria que permite gestionar propiedades, conectar compradores y vendedores, y optimizar el proceso de publicación y búsqueda.",
+    url: "https://wasiq.vercel.app/",
+    imagen: Wasiq,
+    description:
+      "Plataforma inmobiliaria que permite gestionar propiedades, conectar compradores y vendedores, y optimizar el proceso de publicación y búsqueda. Desarrollado con Next.js, TypeScript, PostgreSQL, Spring, Tailwind CSS y Docker para una experiencia de usuario fluida y eficiente.",
+    url_svg: [nextjs, typescript, postgresql, spring, tailwind, docker],
   },
   {
     id: "03",
-    title: "WASIQ",
-    description: "Plataforma inmobiliaria que permite gestionar propiedades, conectar compradores y vendedores, y optimizar el proceso de publicación y búsqueda.",
+    title: "AD Studio",
+    url: "#",
+    imagen: ADStudio,
+    description:
+      "Landing page para un estudio de diseño web, multimedia y marketing digital, desarrollado con WordPress y Elementor usando un diseño moderno y atractivo que destaca los servicios ofrecidos.",
+    url_svg: [wordpress, elementor],
   },
   {
     id: "04",
-    title: "WASIQ",
-    description: "Plataforma inmobiliaria que permite gestionar propiedades, conectar compradores y vendedores, y optimizar el proceso de publicación y búsqueda.",
+    title: "Portafolio Personal",
+    url: "https://axel-astro-portfolio.netlify.app/",
+    imagen: portfolio,
+    description:
+      "Portafolio personal desarrollado con Astro y Tailwind CSS, diseñado para mostrar proyectos y habilidades de manera elegante y responsiva, con animaciones suaves y una experiencia de usuario optimizada.",
+    url_svg: [astro, tailwind],
   },
-  {
-    id: "05 ",
-    title: "WASIQ",
-    description: "Plataforma inmobiliaria que permite gestionar propiedades, conectar compradores y vendedores, y optimizar el proceso de publicación y búsqueda.",
-  },
-  {
-    id: "06 ",
-    title: "WASIQ",
-    description: "Plataforma inmobiliaria que permite gestionar propiedades, conectar compradores y vendedores, y optimizar el proceso de publicación y búsqueda.",
-  }
+  
 ];
 ---
 
-<section class="bg-[#1a1a1a] text-white py-24 px-8 md:px-16 h-dvh">
-  <h2 class="text-3xl md:text-4xl font-black text-center font-sans-akira mb-20 uppercase letter-spacing-wide">
+<section
+  class="projects-wrapper bg-[#222222] text-white py-24 h-screen overflow-hidden flex flex-col justify-center"
+>
+  <h2
+    class="text-3xl md:text-4xl font-black text-center font-sans-akira mb-20 mt-8 uppercase letter-spacing-wide"
+  >
     Mis Proyectos
   </h2>
-  
-  <div class="relative">
+
   <div
     id="project-slider"
-    class="project-grid flex gap-6 overflow-x-auto scroll-smooth overflow-y-hidden snap-x snap-mandatory cursor-grab active:cursor-grabbing select-none pb-4"
+    class="projects-track flex gap-6 w-max px-8 md:px-16"
   >
-    {proyectos.map((proyecto) => (
-      <article
-        class="project-card w-2xl snap-start shrink-0 group cursor-pointer"
-      >
-        <span class="text-4xl font-black mb-6 block text-neutral-100 font-sans-akira">
-          {proyecto.id}
-        </span>
-
-        <div class="overflow-hidden rounded-lg mb-6 bg-zinc-800">
-          <img
-            src=""
-            alt={`Captura del proyecto ${proyecto.title}`}
-            class="w-full h-96 object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-in-out"
-          />
-        </div>
-
-        <h3 class="text-2xl uppercase mb-3 font-sans-akira">
-          {proyecto.title}
-        </h3>
-
-        <p class="text-gray-400 text-lg leading-relaxed mb-4 min-h-20 font-sans-inter">
-          {proyecto.description}
-        </p>
-
-        <div class="flex gap-3 text-gray-500">
-          <span class="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center text-xs">
-            ⚙️
+    {
+      proyectos.map((proyecto) => (
+        <article class="project-card w-[85vw] flex flex-col h-[calc(100%-0px)] md:w-[600px] px-12 shrink-0 group cursor-pointer">
+          <span class="text-4xl font-black mb-6 block text-neutral-100 font-sans-akira">
+            {proyecto.id}
           </span>
 
-          <span class="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center text-xs">
-            ⚛️
-          </span>
-        </div>
-      </article>
-    ))}
+          <a href={proyecto.url} class="overflow-hidden rounded-lg mb-6 bg-zinc-800">
+            {proyecto.imagen ? (
+              <Image
+                src={proyecto.imagen}
+                alt={proyecto.title}
+                width={1440}
+                height={1080}
+                class="w-full h-84 object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
+              />
+            ) : (
+              <div class="w-full h-78 bg-zinc-700 flex items-center justify-center">
+                <span class="text-gray-500">Imagen no disponible</span>
+              </div>
+            )}
+          </a>
+
+          <div class="flex flex-col justify-between h-[calc(100%-400px)]">
+            <h3 class="text-2xl uppercase mb-3 font-sans-akira mt-3 overflow-hidden text-ellipsis whitespace-nowrap">
+              {proyecto.title}
+            </h3>
+
+            <p class="text-gray-400 text-md md:text-lg leading-relaxed mb-4 min-h-[calc(100%-100px)] font-sans-inter text-ellipsis overflow-hidden line-clamp-3 md:line-clamp-5">
+              {proyecto.description}
+            </p>
+
+            <div class="flex gap-3 text-gray-500">
+              {proyecto.url_svg.map((svg) => (
+                <img src={svg.src} alt="Tecnología" class="w-8 h-8" />
+              ))}
+            </div>
+          </div>
+        </article>
+      ))
+    }
   </div>
-</div>
 </section>
 
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import Lenis from "lenis";
 
   gsap.registerPlugin(ScrollTrigger);
-  gsap.from(".project-card", {
-    scrollTrigger: {
-      trigger: ".project-grid",
-      start: "top 80%",
-    },
-    y: 50,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: "power2.out"
+
+  const lenis = new Lenis({
+    duration: 1.2, // Controla la suavidad del scroll
+    // se una 1 para un scroll lineal, 1.001 para un scroll que se desacelera al final, o cualquier valor entre 0 y 1 para un scroll más suave.
+    // Math.pow es una función matemática que eleva un número a una potencia. En este caso, se utiliza para crear una curva de desaceleración personalizada.
+    // 2, -10 * t significa que el scroll se desacelerará exponencialmente a medida que t (el tiempo) se acerca a 1. 
+    // Esto crea un efecto de desaceleración suave al final del scroll.
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   });
 
+  // GSAP y Lenis tienen sus propios "relojes" internos para animar.
+  // Estas tres líneas son cruciales para sincronizarlos, de modo que
+  // GSAP sepa exactamente dónde está el scroll de Lenis en cada frame.
+  lenis.on("scroll", ScrollTrigger.update);
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0);
+
+  //  slider horizontal gsap
+  const track = document.querySelector(".projects-track");
+  const wrapper = document.querySelector(".projects-wrapper");
+
+  // GSAP necesita saber exactamente cuántos píxeles mover la pista hacia la izquierda.
+  // Esto se calcula restando el ancho de la pantalla al ancho total de todos tus proyectos juntos.
+  const getScrollAmount = () =>
+    track ? -(track.scrollWidth - window.innerWidth) : 0;
+
+  if (track && wrapper) {
+    const tween = gsap.to(track, {
+      x: getScrollAmount,
+      ease: "none",
+    });
+
+    // Configuramos el "Trigger" que activa la animación
+    ScrollTrigger.create({
+      trigger: wrapper, // El contenedor que vamos a fijar en la pantalla
+      start: "top top", // Cuando el tope del contenedor toque el tope de la pantalla
+      end: () => `+=${getScrollAmount() * -1}`, // La duración del scroll vertical será igual al ancho de la pista
+      pin: true, // Fixed
+      animation: tween, // Conectamos la animación que creamos arriba
+      scrub: 1, // Crea un efecto de arrastre suave (tarda 1 segundo en alcanzar al mouse)
+      invalidateOnRefresh: true, // Recalcula las distancias si el usuario cambia el tamaño de la ventana
+    });
+  }
+
+  // Resaltar nombres de tecnologías desde objeto descripción
+  const projectCards = document.querySelectorAll(".project-card");
+  const techNames = ["MongoDB", "Express", "React", "Node.js", "Next.js", "TypeScript", "PostgreSQL", "Spring", "WordPress", "Astro", "Tailwind CSS", "Elementor", "Docker"];
+
+  projectCards.forEach((card) => {
+    const description = card.querySelector("p");
+    if (description) {
+      let html = description.innerHTML;
+      techNames.forEach((tech) => {
+        const regex = new RegExp(`\\b${tech}\\b`, "g");
+        html = html.replace(regex, `<span class="text-white font-normal">${tech}</span>`);
+      });
+      description.innerHTML = html;
+    }
+  })
+
+
 </script>
-
-<style>
-  .project-grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  .project-grid {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .dragging {
-    cursor: grabbing;
-  }
-</style>
