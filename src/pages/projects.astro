@@ -1,16 +1,318 @@
 ---
+import reactlogo from "../assets/react.svg";
+import mongodb from "../assets/mongodb.svg";
+import nodejs from "../assets/nodejs02.svg";
+import express from "../assets/express.svg";
+import nextjs from "../assets/nextjs-fill.svg";
+import typescript from "../assets/typescript-16.svg";
+import postgresql from "../assets/postgresql.svg";
+import spring from "../assets/spring.svg";
+import wordpress from "../assets/wordpress.svg";
+import astro from "../assets/astro.svg";
+import tailwind from "../assets/tailwindcss.svg";
+import docker from "../assets/docker.svg";
+import elementor from "../assets/elementor.svg";
+import { Image } from "astro:assets";
+import Wasiq from "../assets/images/Wasiq.webp";
+import ADStudio from "../assets/images/adstudio.webp";
+import portfolio from "../assets/images/portfolio.webp";
+import mernChat from "../assets/images/mernchat.webp";
 import Layout from "../layouts/Layout.astro";
 
+interface Proyecto {
+  id: string;
+  title: string;
+  imagen: any;
+  description: string;
+  url: string;
+  category: string;
+  year: string;
+  url_svg: { src: string }[];
+}
 
+const proyectos: Proyecto[] = [
+  {
+    id: "01",
+    title: "CHAT APP",
+    imagen: mernChat,
+    url: "https://mern-chat-2p49.onrender.com/",
+    category: "Fullstack",
+    year: "2024",
+    description:
+      "Chat App desarrollado con el Stack MERN (MongoDB, Express, React, Node.js), permitiendo a los usuarios registrarse, iniciar sesión y enviar mensajes en tiempo real.",
+    url_svg: [mongodb, express, reactlogo, nodejs],
+  },
+  {
+    id: "02",
+    title: "WASIQ",
+    url: "https://wasiq-project-front-git-main-giands96s-projects.vercel.app/",
+    imagen: Wasiq,
+    category: "Fullstack",
+    year: "2024",
+    description:
+      "Plataforma inmobiliaria que permite gestionar propiedades, conectar compradores y vendedores, y optimizar el proceso de publicación y búsqueda. Desarrollado con Next.js, TypeScript, PostgreSQL, Spring, Tailwind CSS y Docker.",
+    url_svg: [nextjs, typescript, postgresql, spring, tailwind, docker],
+  },
+  {
+    id: "03",
+    title: "AD STUDIO",
+    url: "#",
+    imagen: ADStudio,
+    category: "Web",
+    year: "2023",
+    description:
+      "Landing page para un estudio de diseño web, multimedia y marketing digital, desarrollado con WordPress y Elementor usando un diseño moderno y atractivo que destaca los servicios ofrecidos.",
+    url_svg: [wordpress, elementor],
+  },
+  {
+    id: "04",
+    title: "PORTAFOLIO",
+    url: "https://axel-astro-portfolio.netlify.app/",
+    imagen: portfolio,
+    category: "Web",
+    year: "2024",
+    description:
+      "Portafolio personal desarrollado con Astro y Tailwind CSS, diseñado para mostrar proyectos y habilidades de manera elegante y responsiva, con animaciones suaves y una experiencia de usuario optimizada.",
+    url_svg: [astro, tailwind],
+  },
+];
 ---
-
 <Layout>
-    <main class="antialiased">
-        <section class="container mx-auto py-16">
-            <section class="mb-12">
-                <h2 class="text-3xl font-bold mb-4">Proyectos Destacados</h2>
-                <p class="text-gray-700 mb-8">
-                    Echa un vistazo a algunos de mis proyectos más recientes y destacados.
-                </p>
 
-</Layout>
+<main id="projects-page" class="bg-[#111111] min-h-screen text-white overflow-x-hidden">
+
+  <!-- HERO -->
+  <section class="relative h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-16 overflow-hidden">
+    <span
+      id="bg-number"
+      class="absolute right-8 top-1/2 -translate-y-1/2 font-sans-akira text-[22vw] text-neutral-100 opacity-[0.06] select-none leading-none pointer-events-none"
+    >
+      WORK
+    </span>
+
+    <div id="page-hero-content">
+      <p id="hero-tag" class="font-serif italic text-gray-500 text-xl md:text-2xl mb-4 opacity-0">
+        — Selección de proyectos
+      </p>
+      <h1
+        id="page-title"
+        class="font-sans-akira uppercase text-[clamp(3.5rem,10vw,9rem)] leading-[0.85] tracking-[-0.03em] opacity-0"
+      >
+        Mis<br />Proyectos
+      </h1>
+    </div>
+
+    <div id="project-count" class="absolute right-8 md:right-16 bottom-16 text-right opacity-0">
+      <span class="font-sans-akira text-5xl md:text-7xl text-neutral-100 opacity-20">
+        {proyectos.length.toString().padStart(2, "0")}
+      </span>
+      <p class="font-sans-inter italic text-gray-500 text-sm mt-1">proyectos</p>
+    </div>
+
+    
+  </section>
+
+  <!-- FILTROS -->
+  <section class="px-6 sm:px-8 md:px-16 pb-12 pt-0">
+    <div id="filters" class="flex gap-3 flex-wrap opacity-0">
+      {["Todos", "Fullstack", "Web"].map((cat) => (
+        <button
+          data-filter={cat}
+          class:list={[
+            "filter-btn font-sans-akira text-sm uppercase tracking-widest px-5 py-2 rounded-full border transition-all duration-300 cursor-pointer",
+            cat === "Todos"
+              ? "bg-white text-black border-white"
+              : "bg-transparent text-gray-400 border-gray-700 hover:border-white hover:text-white",
+          ]}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <!-- GRID -->
+  <section class="px-6 sm:px-8 md:px-16 pb-32">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5">
+      {
+        proyectos.map((proyecto) => (
+          <article
+            data-category={proyecto.category}
+            class="project-item group relative bg-[#111111] overflow-hidden cursor-pointer"
+          >
+            <a href={proyecto.url} class="block relative overflow-hidden aspect-video">
+              {proyecto.imagen ? (
+                <Image
+                  src={proyecto.imagen}
+                  alt={proyecto.title}
+                  width={1440}
+                  height={810}
+                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+              ) : (
+                <div class="w-full h-full bg-zinc-800 flex items-center justify-center">
+                  <span class="text-gray-600 font-sans-inter italic">Sin imagen</span>
+                </div>
+              )}
+              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                <span class="font-sans-akira text-white uppercase text-sm tracking-widest border border-white px-6 py-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  Ver Proyecto ↗
+                </span>
+              </div>
+            </a>
+
+            <div class="p-8">
+              <div class="flex items-start justify-between mb-4">
+                <span class="font-sans-akira text-neutral-100 opacity-20 text-4xl leading-none">{proyecto.id}</span>
+                <div class="text-right">
+                  <span class="font-sans-inter italic text-gray-500 text-sm block">{proyecto.category}</span>
+                  <span class="font-sans-inter italic text-gray-600 text-xs">{proyecto.year}</span>
+                </div>
+              </div>
+
+              <h2 class="font-sans-akira text-2xl md:text-3xl uppercase mb-4 leading-tight">
+                {proyecto.title}
+              </h2>
+
+              <p class="font-sans-inter text-gray-400 text-sm md:text-base leading-relaxed mb-6 line-clamp-3">
+                {proyecto.description}
+              </p>
+
+              <div class="flex gap-3 items-center">
+                {proyecto.url_svg.map((svg) => (
+                  <img
+                    src={svg.src}
+                    alt="Tecnología"
+                    class="w-6 h-6 opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+                  />
+                ))}
+              </div>
+            </div>
+
+            <!-- Línea animada inferior -->
+            <div class="absolute bottom-0 left-0 h-[2px] w-0 bg-white group-hover:w-full transition-all duration-500 ease-out"></div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="projects-cta" class="h-[40vh] flex items-center justify-center px-6 border-t border-white/10 opacity-0">
+    <div class="text-center">
+      <p class="font-sans-inter italic text-gray-500 mb-4 text-lg">¿Tienes un proyecto en mente?</p>
+      <a
+        href="/contact"
+        class="font-sans-akira uppercase text-4xl md:text-6xl text-white hover:text-gray-300 transition-colors duration-300 group inline-flex items-center gap-4"
+      >
+        Hablemos
+        <span class="inline-block group-hover:translate-x-3 transition-transform duration-300">→</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<Layout/>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import Lenis from "lenis";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+
+  // ── Hero entrada ──
+  gsap.set("#hero-tag",      { y: 20,  opacity: 0 });
+  gsap.set("#page-title",    { y: 60,  opacity: 0 });
+  gsap.set("#project-count", { y: 20,  opacity: 0 });
+  gsap.set("#scroll-hint",   {         opacity: 0 });
+
+  const tl = gsap.timeline({ delay: 0.3 });
+  tl.to("#hero-tag",      { y: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, 0);
+  tl.to("#page-title",    { y: 0, opacity: 1, duration: 1,   ease: "power2.out" }, 0.2);
+  tl.to("#project-count", { y: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, 0.5);
+  tl.to("#scroll-hint",   {       opacity: 1, duration: 0.6, ease: "power2.out" }, 0.8);
+
+  // Línea scroll animada
+  gsap.to("#scroll-line", { y: 48, duration: 1.5, ease: "power1.inOut", repeat: -1 });
+
+  // Parallax texto fondo
+  gsap.to("#bg-number", {
+    y: -80,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#projects-page",
+      start: "top top",
+      end: "30% top",
+      scrub: 1.5,
+    },
+  });
+
+  // ── Filtros entrada ──
+  ScrollTrigger.create({
+    trigger: "#filters",
+    start: "top 85%",
+    onEnter: () => gsap.to("#filters", { opacity: 1, duration: 0.6, ease: "power2.out" }),
+  });
+
+  // ── Cards entrada con stagger ──
+  const cards = gsap.utils.toArray<HTMLElement>(".project-item");
+  cards.forEach((card, i) => {
+    gsap.set(card, { opacity: 0, y: 50 });
+    ScrollTrigger.create({
+      trigger: card,
+      start: "top 88%",
+      onEnter: () => {
+        gsap.to(card, {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          delay: (i % 2) * 0.15,
+          ease: "power2.out",
+        });
+      },
+    });
+  });
+
+  // ── CTA final ──
+  ScrollTrigger.create({
+    trigger: "#projects-cta",
+    start: "top 80%",
+    onEnter: () => gsap.to("#projects-cta", { opacity: 1, duration: 1, ease: "power2.out" }),
+  });
+
+  // ── Filtrado por categoría ──
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter ?? "Todos";
+
+      filterBtns.forEach((b) => {
+        b.classList.remove("bg-white", "text-black", "border-white");
+        b.classList.add("bg-transparent", "text-gray-400", "border-gray-700");
+      });
+      btn.classList.add("bg-white", "text-black", "border-white");
+      btn.classList.remove("bg-transparent", "text-gray-400", "border-gray-700");
+
+      document.querySelectorAll<HTMLElement>(".project-item").forEach((item) => {
+        const match = filter === "Todos" || item.dataset.category === filter;
+        gsap.to(item, {
+          opacity: match ? 1 : 0.15,
+          scale:   match ? 1 : 0.97,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+      });
+    });
+  });
+</script>

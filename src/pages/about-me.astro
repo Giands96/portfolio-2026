@@ -1,0 +1,414 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// src/pages/about-me.astro  |  componente About-me.astro
+
+const skills = [
+  { category: "Frontend",            items: ["React", "Next.js", "Astro", "TypeScript", "Tailwind CSS"] },
+  { category: "Backend",             items: ["Node.js", "Express", "Spring Boot", "Java"] },
+  { category: "Base de datos",       items: ["PostgreSQL", "MongoDB", "MySQL"] },
+  { category: "DevOps & Herramientas", items: ["Docker", "Git", "GitHub", "Linux"] },
+  { category: "Diseño",              items: ["Figma", "UX/UI Design", "Responsive Design"] },
+];
+
+const experiencia = [
+  {
+    year: "2024",
+    rol: "Fullstack Developer",
+    empresa: "Freelance",
+    descripcion:
+      "Desarrollo de aplicaciones web completas, desde diseño de interfaces hasta implementación de APIs y bases de datos. Especialización en Next.js y Spring Boot.",
+  },
+  {
+    year: "2023",
+    rol: "Frontend Developer",
+    empresa: "AD Studio",
+    descripcion:
+      "Desarrollo de landing pages y sitios corporativos con WordPress, Elementor y diseño UX/UI centrado en conversión.",
+  },
+  {
+    year: "2022",
+    rol: "Inicio en Desarrollo",
+    empresa: "Autoaprendizaje",
+    descripcion:
+      "Primeros pasos con HTML, CSS, JavaScript. Construcción de proyectos personales para consolidar conocimientos en desarrollo web moderno.",
+  },
+];
+---
+<Layout>
+<main id="about-page" class="bg-white text-black overflow-x-hidden">
+
+  <!-- HERO -->
+  <section id="about-hero" class="relative h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-16 overflow-hidden bg-white">
+
+    <span
+      id="about-bg-text"
+      class="absolute left-0 top-1/2 -translate-y-1/2 font-sans-akira text-[18vw] text-neutral-900 opacity-[0.06] select-none leading-none pointer-events-none whitespace-nowrap"
+    >
+      ABOUT ME
+    </span>
+
+    <div>
+      <p id="about-tag" class="font-serif italic text-gray-500 text-xl md:text-2xl mb-4 opacity-0">
+        — Encantado de conocerte
+      </p>
+      <h1
+        id="about-title"
+        class="font-sans-akira uppercase text-[clamp(3rem,9vw,8.5rem)] leading-[0.85] tracking-[-0.03em] text-black opacity-0"
+      >
+        Soy Axel<br />Developer
+      </h1>
+    </div>
+
+    <div id="about-scroll" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0">
+      <span class="font-sans-inter italic text-gray-400 text-xs">scroll</span>
+      <div class="w-px h-12 bg-gradient-to-b from-gray-400 to-transparent overflow-hidden relative">
+        <div id="ascroll-line" class="absolute top-0 left-0 w-full bg-black h-4"></div>
+      </div>
+    </div>
+
+    <div class="absolute right-8 md:right-16 bottom-16 text-right">
+      <span id="about-deco" class="font-serif italic text-neutral-900 opacity-0 text-6xl md:text-8xl select-none">
+        Axel.
+      </span>
+    </div>
+  </section>
+
+  <!-- BIO -->
+  <section id="about-bio" class="px-6 sm:px-8 md:px-16 py-24 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-16 border-t border-black/10">
+    <div id="bio-left" class="opacity-0">
+      <p class="font-sans-akira text-xs uppercase tracking-widest text-gray-400 mb-6">Sobre mí</p>
+      <h2 class="font-sans-akira uppercase text-3xl md:text-4xl leading-tight text-black">
+        Construyo experiencias digitales que conectan.
+      </h2>
+    </div>
+
+    <div id="bio-right" class="opacity-0 flex flex-col gap-6">
+      <p class="font-sans-inter text-lg md:text-xl text-gray-600 leading-relaxed">
+        Soy un desarrollador Fullstack de Lima, Perú, con pasión por crear interfaces que no solo funcionan perfectamente, sino que también se ven y se sienten increíbles.
+      </p>
+      <p class="font-sans-inter text-lg md:text-xl text-gray-600 leading-relaxed">
+        Me especializo en el stack de JavaScript moderno y Java/Spring Boot, combinando desarrollo sólido en el backend con interfaces cuidadas en el frontend. Cada proyecto es una oportunidad de llevar la calidad al siguiente nivel.
+      </p>
+      <p class="font-sans-inter italic text-gray-400 text-base">
+        — Disponible para proyectos freelance y colaboraciones.
+      </p>
+      <a
+        href="/contact"
+        class="group self-start font-sans-akira uppercase text-sm tracking-widest mt-2 flex items-center gap-3 text-black border-b border-black pb-1 hover:gap-5 transition-all duration-300"
+      >
+        Trabajemos juntos
+        <span class="group-hover:translate-x-2 transition-transform duration-300">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="about-skills" class="bg-[#111111] text-white px-6 sm:px-8 md:px-16 py-24 md:py-32">
+    <div class="mb-16">
+      <p id="skills-tag" class="font-serif italic text-gray-500 text-xl md:text-2xl mb-4 opacity-0">
+        — Mis herramientas
+      </p>
+      <h2 id="skills-title" class="font-sans-akira uppercase text-4xl md:text-6xl leading-tight opacity-0">
+        Stack &<br />Habilidades
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5">
+      {
+        skills.map((group) => (
+          <div class="skill-group bg-[#111111] p-8 opacity-0">
+            <span class="font-sans-akira text-xs uppercase tracking-widest text-gray-600 block mb-6">
+              {group.category}
+            </span>
+            <ul class="flex flex-col gap-3">
+              {group.items.map((skill) => (
+                <li class="flex items-center gap-3 font-sans-inter text-lg text-white group/item cursor-default">
+                  <span class="w-1 h-1 rounded-full bg-white/20 group-hover/item:bg-white group-hover/item:w-3 transition-all duration-300 block flex-shrink-0"></span>
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section id="about-exp" class="px-6 sm:px-8 md:px-16 py-24 md:py-32 bg-white">
+    <div class="mb-16">
+      <p id="exp-tag" class="font-serif italic text-gray-500 text-xl md:text-2xl mb-4 opacity-0">
+        — Mi recorrido
+      </p>
+      <h2 id="exp-title" class="font-sans-akira uppercase text-4xl md:text-6xl leading-tight text-black opacity-0">
+        Experiencia
+      </h2>
+    </div>
+
+    <div class="relative">
+      <!-- Track de fondo -->
+      <div class="absolute left-0 top-0 bottom-0 w-px bg-black/10 hidden md:block"></div>
+      <!-- Línea animada con scroll -->
+      <div id="timeline-line" class="absolute left-0 top-0 w-px bg-black hidden md:block" style="height:0%"></div>
+
+      <div class="flex flex-col">
+        {
+          experiencia.map((item) => (
+            <div class="exp-item relative pl-0 md:pl-16 py-10 border-b border-black/10 last:border-b-0 group opacity-0">
+              <!-- Punto -->
+              <div class="absolute left-[-4.5px] top-12 w-[9px] h-[9px] rounded-full bg-black/20 group-hover:bg-black transition-colors duration-300 hidden md:block"></div>
+
+              <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-12">
+                <div>
+                  <span class="font-sans-akira text-3xl text-neutral-900 opacity-15 block leading-none">{item.year}</span>
+                </div>
+                <div>
+                  <h3 class="font-sans-akira uppercase text-xl md:text-2xl text-black mb-1">{item.rol}</h3>
+                  <p class="font-sans-inter italic text-gray-500 text-base mb-4">{item.empresa}</p>
+                  <p class="font-sans-inter text-gray-600 text-base md:text-lg leading-relaxed">{item.descripcion}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="about-cta" class="bg-[#1a1a1a] px-6 sm:px-8 md:px-16 py-24 md:py-32 flex flex-col items-center text-center overflow-hidden">
+    <p id="cta-tag" class="font-serif italic text-gray-500 text-xl md:text-2xl mb-6 opacity-0">
+      — ¿Listo para crear algo increíble?
+    </p>
+    <a
+      href="/contact"
+      id="cta-link"
+      class="font-sans-akira uppercase text-[clamp(2.5rem,7vw,6rem)] leading-none tracking-[-0.02em] text-white hover:text-gray-400 transition-colors duration-500 group inline-flex items-end gap-4 opacity-0"
+    >
+      Contactame
+      <span class="text-[clamp(1.5rem,3vw,3rem)] opacity-40 group-hover:opacity-100 group-hover:translate-x-3 transition-all duration-300">↗</span>
+    </a>
+  </section>
+
+</main>
+<Layout/>
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import Lenis from "lenis";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+
+  // ── Hero entrada ──
+  gsap.set("#about-tag",    { y: 20, opacity: 0 });
+  gsap.set("#about-title",  { y: 60, opacity: 0 });
+  gsap.set("#about-scroll", {        opacity: 0 });
+  gsap.set("#about-deco",   { x: 20, opacity: 0 });
+
+  // Entrada: timeline independiente del scroll
+  const tl = gsap.timeline({ delay: 0.3 });
+  tl.to("#about-tag",    { y: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, 0);
+  tl.to("#about-title",  { y: 0, opacity: 1, duration: 1.1, ease: "power2.out" }, 0.2);
+  tl.to("#about-scroll", {       opacity: 1, duration: 0.6, ease: "power2.out" }, 0.7);
+  tl.to("#about-deco",   { x: 0, opacity: 1, duration: 1,   ease: "power2.out" }, 0.4);
+
+  gsap.set("#about-tag", {
+  y: -30,
+  opacity: 0,
+});
+
+gsap.set("#about-title", {
+  y: -50,
+  opacity: 0,
+});
+
+gsap.to("#about-tag", {
+  y: 0,
+  opacity: 1,
+  duration: 1,
+  ease: "power2.out",
+  delay: 0.3,
+  onComplete: () => {
+    gsap.to("#about-tag", {
+      y: 30,
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#about-hero",
+        start: "40% top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  },
+});
+
+gsap.to("#about-title", {
+  y: 0,
+  opacity: 1,
+  duration: 1,
+  ease: "power2.out",
+  delay: 0.5,
+  onComplete: () => {
+    gsap.to("#about-title", {
+      y: -40,
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#about-hero",
+        start: "40% top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  },
+});
+
+  gsap.to("#about-deco", {
+  y: 0,
+  opacity: 1,
+  duration: 1,
+  ease: "power2.out",
+  delay: 0.5,
+  onComplete: () => {
+    gsap.to("#about-deco", {
+      y: -40,
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#about-hero",
+        start: "40% top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  },
+});
+
+  gsap.to("#about-scroll", {
+    opacity: 0,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#about-hero",
+      start: "top top",
+      end: "30% top",
+      scrub: 1,
+    },
+  });
+
+  // Parallax texto fondo — mismo trigger correcto
+  gsap.to("#about-bg-text", {
+    x: -120,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#about-hero",
+      start: "top top",
+      end: "bottom top",
+      scrub: 1.5,
+    },
+  });
+
+  // Línea scroll animada
+  gsap.to("#ascroll-line", { y: 48, duration: 1.5, ease: "power1.inOut", repeat: -1 });
+
+  // ── Bio ──
+  gsap.set("#bio-left",  { y: 40 });
+  gsap.set("#bio-right", { y: 40 });
+
+  ScrollTrigger.create({
+    trigger: "#about-bio",
+    start: "top 78%",
+    onEnter: () => {
+      gsap.to("#bio-left",  { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" });
+      gsap.to("#bio-right", { opacity: 1, y: 0, duration: 0.9, delay: 0.15, ease: "power2.out" });
+    },
+  });
+
+  // ── Skills ──
+  gsap.set("#skills-tag",   { y: 20, opacity: 0 });
+  gsap.set("#skills-title", { y: 40, opacity: 0 });
+
+  ScrollTrigger.create({
+    trigger: "#about-skills",
+    start: "top 75%",
+    onEnter: () => {
+      gsap.to("#skills-tag",   { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" });
+      gsap.to("#skills-title", { y: 0, opacity: 1, duration: 1, delay: 0.15, ease: "power2.out" });
+    },
+  });
+
+  gsap.utils.toArray<HTMLElement>(".skill-group").forEach((group, i) => {
+    gsap.set(group, { y: 50 });
+    ScrollTrigger.create({
+      trigger: group,
+      start: "top 85%",
+      onEnter: () => {
+        gsap.to(group, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: (i % 3) * 0.1,
+          ease: "power2.out",
+        });
+      },
+    });
+  });
+
+  // ── Experiencia ──
+  gsap.set("#exp-tag",   { y: 20, opacity: 0 });
+  gsap.set("#exp-title", { y: 40, opacity: 0 });
+
+  ScrollTrigger.create({
+    trigger: "#about-exp",
+    start: "top 75%",
+    onEnter: () => {
+      gsap.to("#exp-tag",   { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" });
+      gsap.to("#exp-title", { y: 0, opacity: 1, duration: 1, delay: 0.15, ease: "power2.out" });
+    },
+  });
+
+  // Línea timeline que crece con scroll
+  ScrollTrigger.create({
+    trigger: "#about-exp",
+    start: "top 60%",
+    end: "bottom 60%",
+    scrub: 1,
+    onUpdate: (self) => {
+      const line = document.querySelector<HTMLElement>("#timeline-line");
+      if (line) line.style.height = `${self.progress * 100}%`;
+    },
+  });
+
+  gsap.utils.toArray<HTMLElement>(".exp-item").forEach((item) => {
+    gsap.set(item, { x: -30 });
+    ScrollTrigger.create({
+      trigger: item,
+      start: "top 85%",
+      onEnter: () => {
+        gsap.to(item, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" });
+      },
+    });
+  });
+
+  // ── CTA final ──
+  gsap.set("#cta-tag",  { y: 20, opacity: 0 });
+  gsap.set("#cta-link", { y: 40, opacity: 0 });
+
+  ScrollTrigger.create({
+    trigger: "#about-cta",
+    start: "top 75%",
+    onEnter: () => {
+      gsap.to("#cta-tag",  { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" });
+      gsap.to("#cta-link", { y: 0, opacity: 1, duration: 1, delay: 0.2, ease: "power2.out" });
+    },
+  });
+</script>

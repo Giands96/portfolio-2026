@@ -1,4 +1,349 @@
 ---
+import Layout from "../layouts/Layout.astro";
 
+// src/pages/contact.astro  |  componente Contact.astro
 ---
+<Layout>
+<main id="contact-page" class="bg-[#0f0f0f] min-h-screen text-white overflow-x-hidden">
 
+  <!-- HERO -->
+  <section class="relative h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-16 overflow-hidden">
+
+    <span
+      id="contact-bg-text"
+      class="absolute left-0 top-1/2 -translate-y-1/2 font-sans-akira text-[20vw] text-neutral-100 opacity-[0.06] select-none leading-none pointer-events-none whitespace-nowrap"
+    >
+      CONTACT
+    </span>
+
+    <div>
+      <p id="contact-tag" class="font-serif italic text-gray-500 text-xl md:text-2xl mb-4 opacity-0">
+        — Hablemos de tu próximo proyecto
+      </p>
+      <h1
+        id="contact-title"
+        class="font-sans-akira uppercase text-[clamp(3rem,9vw,8.5rem)] leading-[0.85] tracking-[-0.03em] opacity-0"
+      >
+        Cuando<br />Empezamos?
+      </h1>
+    </div>
+
+    
+  </section>
+
+  <!-- INFO + FORMULARIO -->
+  <section class="px-6 sm:px-8 md:px-16 py-24 grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+
+    <!-- Columna izquierda -->
+    <div id="contact-info" class="opacity-0 flex flex-col justify-between gap-12">
+      <div>
+        <p class="font-sans-inter italic text-gray-500 text-sm mb-8 uppercase tracking-widest">
+          Información de contacto
+        </p>
+
+        <div class="flex flex-col gap-8">
+          <div class="contact-info-item border-b border-white/10 pb-6">
+            <span class="font-sans-akira text-xs text-gray-600 uppercase tracking-widest block mb-2">Correo</span>
+            <a
+              href="mailto:axeldelsolardev@gmail.com"
+              class="font-sans-inter text-xl md:text-2xl text-white hover:text-gray-400 transition-colors duration-300 block"
+            >
+              axeldelsolardev@gmail.com
+            </a>
+          </div>
+
+          <div class="contact-info-item border-b border-white/10 pb-6">
+            <span class="font-sans-akira text-xs text-gray-600 uppercase tracking-widest block mb-2">Teléfono</span>
+            <a
+              href="tel:+51944888171"
+              class="font-sans-inter text-xl md:text-2xl text-white hover:text-gray-400 transition-colors duration-300 block"
+            >
+              +51 944 888 171
+            </a>
+          </div>
+
+          <div class="contact-info-item border-b border-white/10 pb-6">
+            <span class="font-sans-akira text-xs text-gray-600 uppercase tracking-widest block mb-2">Ubicación</span>
+            <p class="font-sans-inter text-xl md:text-2xl text-white">Lima, Perú</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Redes -->
+      <div>
+        <p class="font-sans-inter italic text-gray-500 text-sm mb-6 uppercase tracking-widest">Redes</p>
+        <div class="flex flex-col gap-3">
+          {[
+            { name: "GitHub",    url: "https://github.com/" },
+            { name: "LinkedIn",  url: "https://linkedin.com/in/" },
+            { name: "Instagram", url: "https://instagram.com/" },
+          ].map((red) => (
+            <a
+              href={red.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link group font-sans-akira text-sm uppercase tracking-widest text-gray-500 hover:text-white transition-all duration-300 flex items-center gap-3"
+            >
+              <span class="w-6 h-px bg-gray-700 group-hover:w-12 group-hover:bg-white transition-all duration-300 block"></span>
+              {red.name}
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna derecha: formulario -->
+    <div id="contact-form-wrap" class="opacity-0">
+      <p class="font-sans-inter italic text-gray-500 text-sm mb-8 uppercase tracking-widest">Enviar mensaje</p>
+
+      <form id="contact-form" class="flex flex-col gap-6" novalidate>
+
+        <div class="form-field">
+          <label for="nombre" class="font-sans-akira text-xs text-gray-600 uppercase tracking-widest block mb-2">
+            Nombre
+          </label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            placeholder="¿Cómo te llamas?"
+            autocomplete="name"
+            class="w-full bg-transparent border-b border-white/20 focus:border-white outline-none text-white font-sans-inter text-lg py-3 transition-colors duration-300 placeholder:text-gray-700"
+          />
+          <span class="field-error font-sans-inter italic text-red-400 text-sm mt-1 hidden">
+            Este campo es requerido.
+          </span>
+        </div>
+
+        <div class="form-field">
+          <label for="email" class="font-sans-akira text-xs text-gray-600 uppercase tracking-widest block mb-2">
+            Correo
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="tu@correo.com"
+            autocomplete="email"
+            class="w-full bg-transparent border-b border-white/20 focus:border-white outline-none text-white font-sans-inter text-lg py-3 transition-colors duration-300 placeholder:text-gray-700"
+          />
+          <span class="field-error font-sans-inter italic text-red-400 text-sm mt-1 hidden">
+            Ingresa un correo válido.
+          </span>
+        </div>
+
+        <div class="form-field">
+          <label for="servicio" class="font-sans-akira text-xs text-gray-600 uppercase tracking-widest block mb-2">
+            ¿Qué necesitas?
+          </label>
+          <select
+            id="servicio"
+            name="servicio"
+            class="w-full bg-[#0f0f0f] border-b border-white/20 focus:border-white outline-none text-white font-sans-inter text-lg py-3 transition-colors duration-300 cursor-pointer appearance-none"
+          >
+            <option value="" disabled selected class="text-gray-700">Selecciona un servicio</option>
+            <option value="web"       class="bg-[#0f0f0f]">Desarrollo Web</option>
+            <option value="fullstack" class="bg-[#0f0f0f]">Aplicación Fullstack</option>
+            <option value="ux"        class="bg-[#0f0f0f]">Diseño UX/UI</option>
+            <option value="otro"      class="bg-[#0f0f0f]">Otro</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="mensaje" class="font-sans-akira text-xs text-gray-600 uppercase tracking-widest block mb-2">
+            Mensaje
+          </label>
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            placeholder="Cuéntame sobre tu proyecto..."
+            rows="4"
+            class="w-full bg-transparent border-b border-white/20 focus:border-white outline-none text-white font-sans-inter text-lg py-3 transition-colors duration-300 placeholder:text-gray-700 resize-none"
+          ></textarea>
+          <span class="field-error font-sans-inter italic text-red-400 text-sm mt-1 hidden">
+            Este campo es requerido.
+          </span>
+        </div>
+
+        <button
+          type="submit"
+          id="submit-btn"
+          class="group relative mt-4 w-full md:w-auto md:self-start font-sans-akira uppercase text-sm tracking-widest px-10 py-5 bg-white text-black overflow-hidden cursor-pointer"
+        >
+          <span id="btn-text" class="relative z-10 transition-colors duration-300 group-hover:text-white">
+            Enviar Mensaje
+          </span>
+          <span id="btn-loading" class="hidden relative z-10 font-sans-inter italic normal-case text-sm">
+            Enviando...
+          </span>
+          <!-- Hover fill -->
+          <div class="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+        </button>
+
+        <div id="success-msg" class="hidden items-center gap-3 font-sans-inter italic text-green-400 text-base">
+          <span>✓</span> ¡Mensaje enviado! Me pondré en contacto pronto.
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div id="contact-footer-line" class="px-6 sm:px-8 md:px-16 pb-16 opacity-0">
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <p class="font-sans-inter italic text-gray-600 text-sm">
+        Disponible para proyectos freelance — 2024
+      </p>
+      <a
+        href="/"
+        class="font-sans-akira text-xs uppercase tracking-widest text-gray-500 hover:text-white transition-colors duration-300"
+      >
+        ← Volver al inicio
+      </a>
+    </div>
+  </div>
+
+</main>
+</Layout>
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import Lenis from "lenis";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+
+  // ── Hero entrada ──
+  gsap.set("#contact-tag",    { y: 20, opacity: 0 });
+  gsap.set("#contact-title",  { y: 60, opacity: 0 });
+  gsap.set("#contact-scroll", {        opacity: 0 });
+
+  const tl = gsap.timeline({ delay: 0.3 });
+  tl.to("#contact-tag",    { y: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, 0);
+  tl.to("#contact-title",  { y: 0, opacity: 1, duration: 1.1, ease: "power2.out" }, 0.2);
+  tl.to("#contact-scroll", {       opacity: 1, duration: 0.6, ease: "power2.out" }, 0.7);
+
+  // Línea scroll animada
+  gsap.to("#cscroll-line", { y: 48, duration: 1.5, ease: "power1.inOut", repeat: -1 });
+
+  // Parallax texto fondo
+  gsap.to("#contact-bg-text", {
+    x: -100,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#contact-page",
+      start: "top top",
+      end: "30% top",
+      scrub: 1.5,
+    },
+  });
+
+  // ── Info + redes ──
+  ScrollTrigger.create({
+    trigger: "#contact-info",
+    start: "top 80%",
+    onEnter: () => {
+      gsap.to("#contact-info", { opacity: 1, duration: 0.9, ease: "power2.out" });
+
+      gsap.from(".contact-info-item", {
+        y: 30,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: "power2.out",
+      });
+
+      gsap.from(".social-link", {
+        x: -20,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        delay: 0.3,
+        ease: "power2.out",
+      });
+    },
+  });
+
+  // ── Formulario ──
+  ScrollTrigger.create({
+    trigger: "#contact-form-wrap",
+    start: "top 80%",
+    onEnter: () => {
+      gsap.to("#contact-form-wrap", { opacity: 1, duration: 0.9, ease: "power2.out" });
+
+      gsap.from(".form-field", {
+        y: 30,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: "power2.out",
+      });
+    },
+  });
+
+  // ── Footer line ──
+  ScrollTrigger.create({
+    trigger: "#contact-footer-line",
+    start: "top 90%",
+    onEnter: () => gsap.to("#contact-footer-line", { opacity: 1, duration: 0.8, ease: "power2.out" }),
+  });
+
+  // ── Validación y submit ──
+  const form      = document.querySelector<HTMLFormElement>("#contact-form");
+  const submitBtn = document.querySelector<HTMLButtonElement>("#submit-btn");
+  const btnText   = document.querySelector<HTMLElement>("#btn-text");
+  const btnLoad   = document.querySelector<HTMLElement>("#btn-loading");
+  const successMsg = document.querySelector<HTMLElement>("#success-msg");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const nombre  = document.querySelector<HTMLInputElement>("#nombre");
+    const email   = document.querySelector<HTMLInputElement>("#email");
+    const mensaje = document.querySelector<HTMLTextAreaElement>("#mensaje");
+
+    let hasError = false;
+
+    [nombre, email, mensaje].forEach((field) => {
+      const err = field?.parentElement?.querySelector<HTMLElement>(".field-error");
+      if (!field?.value.trim()) {
+        err?.classList.remove("hidden");
+        gsap.from(err!, { x: -10, duration: 0.3, ease: "power2.out" });
+        hasError = true;
+      } else {
+        err?.classList.add("hidden");
+      }
+    });
+
+    if (hasError) return;
+
+    // Loading state
+    btnText?.classList.add("hidden");
+    btnLoad?.classList.remove("hidden");
+    if (submitBtn) submitBtn.disabled = true;
+
+    await new Promise((r) => setTimeout(r, 1800));
+
+    btnLoad?.classList.add("hidden");
+    successMsg?.classList.remove("hidden");
+    successMsg!.style.display = "flex";
+
+    gsap.from(successMsg!, { y: 10, opacity: 0, duration: 0.5, ease: "power2.out" });
+
+    form.reset();
+
+    setTimeout(() => {
+      successMsg!.style.display = "none";
+      btnText?.classList.remove("hidden");
+      if (submitBtn) submitBtn.disabled = false;
+    }, 5000);
+  });
+</script>
