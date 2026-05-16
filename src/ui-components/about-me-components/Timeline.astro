@@ -1,0 +1,70 @@
+---
+/**
+ * Timeline Component
+ * Componente de timeline vertical para mostrar experiencia o cronología
+ * 
+ * @prop {string} id - ID único para animaciones
+ * @prop {string} subtitle - Etiqueta descriptiva
+ * @prop {string} title - Título principal
+ * @prop {Array<{year: string, rol: string, empresa: string, descripcion: string}>} items - Items de timeline
+ */
+
+interface TimelineItem {
+  year: string;
+  rol: string;
+  empresa: string;
+  descripcion: string;
+}
+
+interface Props {
+  id: string;
+  subtitle: string;
+  title: string;
+  items: TimelineItem[];
+}
+
+const { id, subtitle, title, items } = Astro.props;
+const tagId = `${id}-tag`;
+const titleId = `${id}-title`;
+const lineId = `${id}-line`;
+---
+
+<section id={id} class="px-6 sm:px-8 md:px-16 py-24 md:py-32 bg-white">
+  <div class="mb-16">
+    <p id={tagId} class="font-serif italic text-gray-500 text-xl md:text-2xl mb-4 opacity-0">
+      {subtitle}
+    </p>
+    <h2 id={titleId} class="font-sans-akira uppercase text-4xl md:text-6xl leading-tight text-black opacity-0">
+      {title}
+    </h2>
+  </div>
+
+  <div class="relative">
+    <!-- Línea vertical de fondo -->
+    <div class="absolute left-0 top-0 bottom-0 w-px bg-black/10 hidden md:block"></div>
+    <!-- Línea vertical animada -->
+    <div id={lineId} class="absolute left-0 top-0 w-px bg-black hidden md:block" style="height: 0%"></div>
+
+    <div class="flex flex-col gap-0">
+      {items.map((item, i) => (
+        <div
+          class="exp-item relative pl-0 md:pl-16 py-10 border-b border-black/10 last:border-b-0 group opacity-0"
+        >
+          <!-- Punto en la línea -->
+          <div class="absolute left-[-4.5px] top-12 w-[9px] h-[9px] rounded-full bg-black/20 group-hover:bg-black transition-colors duration-300 hidden md:block"></div>
+
+          <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-12">
+            <div>
+              <span class="font-sans-akira text-3xl text-black/15 block leading-none">{item.year}</span>
+            </div>
+            <div>
+              <h3 class="font-sans-akira uppercase text-xl md:text-2xl text-black mb-1">{item.rol}</h3>
+              <p class="font-serif italic text-gray-500 text-base mb-4">{item.empresa}</p>
+              <p class="font-sans-inter text-gray-600 text-base md:text-lg leading-relaxed">{item.descripcion}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

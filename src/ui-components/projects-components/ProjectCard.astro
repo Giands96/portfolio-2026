@@ -1,0 +1,95 @@
+---
+/**
+ * ProjectCard Component
+ * Tarjeta individual de proyecto con imagen, info y tecnologías
+ * 
+ * @prop {string} id - ID único (ej: "01", "02")
+ * @prop {string} title - Título del proyecto
+ * @prop {any} image - Imagen del proyecto (astro:assets ImageMetadata)
+ * @prop {string} description - Descripción del proyecto
+ * @prop {string} category - Categoría (Fullstack, Web, Design, etc)
+ * @prop {string} year - Año del proyecto
+ * @prop {string} url - URL del proyecto
+ * @prop {Array<{src: string}>} technologies - Logos de tecnologías
+ */
+
+import { Image } from "astro:assets";
+
+interface Technology {
+  src: string;
+}
+
+interface Props {
+  id: string;
+  title: string;
+  image: any;
+  description: string;
+  category: string;
+  year: string;
+  url: string;
+  technologies: Technology[];
+}
+
+const { id, title, image, description, category, year, url, technologies } = Astro.props;
+---
+
+<article
+  data-category={category}
+  class="project-item group relative bg-[#111111] overflow-hidden cursor-pointer"
+>
+  <!-- Imagen con overlay -->
+  <a href={url} target="_blank" rel="noopener noreferrer" class="block relative overflow-hidden aspect-video">
+    {image ? (
+      <Image
+        src={image}
+        alt={title}
+        width={1440}
+        height={810}
+        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+      />
+    ) : (
+      <div class="w-full h-full bg-zinc-800 flex items-center justify-center">
+        <span class="text-gray-600 font-serif italic">Sin imagen</span>
+      </div>
+    )}
+    <!-- Overlay al hover -->
+    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+      <span class="font-sans-akira text-white uppercase text-sm tracking-widest border border-white px-6 py-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-400">
+        Ver Proyecto ↗
+      </span>
+    </div>
+  </a>
+
+  <!-- Info -->
+  <div class="p-8">
+    <div class="flex items-start justify-between mb-4">
+      <span class="font-sans-akira text-white/20 text-4xl leading-none">{id}</span>
+      <div class="text-right">
+        <span class="font-serif italic text-gray-500 text-sm block">{category}</span>
+        <span class="font-serif italic text-gray-600 text-xs">{year}</span>
+      </div>
+    </div>
+
+    <h2 class="font-sans-akira text-2xl text-neutral-100 md:text-3xl uppercase mb-4 leading-tight">
+      {title}
+    </h2>
+
+    <p class="font-sans-inter text-gray-400 text-sm md:text-base leading-relaxed mb-6 line-clamp-3">
+      {description}
+    </p>
+
+    <!-- Tecnologías -->
+    <div class="flex gap-3 items-center">
+      {technologies.map((tech) => (
+        <img
+          src={tech.src}
+          alt="Tecnología"
+          class="w-6 h-6 opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+        />
+      ))}
+    </div>
+  </div>
+
+  <!-- Línea animada -->
+  <div class="project-line absolute bottom-0 left-0 h-[2px] w-0 bg-white group-hover:w-full transition-all duration-500 ease-out"></div>
+</article>
