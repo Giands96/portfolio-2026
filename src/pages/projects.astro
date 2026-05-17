@@ -18,6 +18,7 @@ import ADStudio from "../assets/images/adstudio.webp";
 import portfolio from "../assets/images/portfolio.webp";
 import mernChat from "../assets/images/mernchat.webp";
 import Layout from "../layouts/Layout.astro";
+import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro";
 
 interface Proyecto {
   id: string;
@@ -83,6 +84,7 @@ const proyectos: Proyecto[] = [
 
   <!-- HERO -->
   <section class="relative h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-16 overflow-hidden">
+    <DynamicIsland/>
     <span
       id="bg-number"
       class="absolute right-8 top-1/2 -translate-y-1/2 font-sans-akira text-[22vw] text-neutral-100 opacity-[0.06] select-none leading-none pointer-events-none"

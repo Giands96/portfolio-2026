@@ -11,7 +11,7 @@ const AboutMe = "./about-me"
         id="links"
         class="hover:w-full h-full flex items-center justify-center gap-6 px-4 opacity-0 transition-opacity duration-300"
       >
-        <a class="text-white font-sans-akira hover:text-neutral-400 whitespace-nowrap" href="#">Inicio</a>
+        <a class="text-white font-sans-akira hover:text-neutral-400 whitespace-nowrap" href="/">Inicio</a>
         <a class="text-white font-sans-akira hover:text-neutral-400 whitespace-nowrap"href={AboutMe}>Sobre mi</a>
         <a class="text-white font-sans-akira hover:text-neutral-400 whitespace-nowrap" href="/projects">Proyectos</a>
         <a class="text-white font-sans-akira hover:text-neutral-400 whitespace-nowrap" href="/contact">Contacto</a>
@@ -76,7 +76,7 @@ function closeIsland() {
 
   gsap.to("#links", {
     opacity: 0,
-    duration: 0.1,
+    duration: 0.2,
     ease: "power2.out",
     pointerEvents: "none"
   });

@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro";
 
 // src/pages/contact.astro  |  componente Contact.astro
 ---
@@ -8,7 +9,7 @@ import Layout from "../layouts/Layout.astro";
 
   <!-- HERO -->
   <section class="relative h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-16 overflow-hidden">
-
+    <DynamicIsland/>
     <span
       id="contact-bg-text"
       class="absolute left-0 top-1/2 -translate-y-1/2 font-sans-akira text-[20vw] text-neutral-100 opacity-[0.06] select-none leading-none pointer-events-none whitespace-nowrap"

@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro";
 
 // src/pages/about-me.astro  |  componente About-me.astro
 
@@ -40,7 +41,7 @@ const experiencia = [
 
   <!-- HERO -->
   <section id="about-hero" class="relative h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-16 overflow-hidden bg-white">
-
+    <DynamicIsland/>
     <span
       id="about-bg-text"
       class="absolute left-0 top-1/2 -translate-y-1/2 font-sans-akira text-[18vw] text-neutral-900 opacity-[0.06] select-none leading-none pointer-events-none whitespace-nowrap"
@@ -60,12 +61,7 @@ const experiencia = [
       </h1>
     </div>
 
-    <div id="about-scroll" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0">
-      <span class="font-sans-inter italic text-gray-400 text-xs">scroll</span>
-      <div class="w-px h-12 bg-gradient-to-b from-gray-400 to-transparent overflow-hidden relative">
-        <div id="ascroll-line" class="absolute top-0 left-0 w-full bg-black h-4"></div>
-      </div>
-    </div>
+    
 
     <div class="absolute right-8 md:right-16 bottom-16 text-right">
       <span id="about-deco" class="font-serif italic text-neutral-900 opacity-0 text-6xl md:text-8xl select-none">
