@@ -9,7 +9,7 @@ const skills = [
   { category: "Backend",             items: ["Node.js", "Express", "Spring Boot", "Java"] },
   { category: "Base de datos",       items: ["PostgreSQL", "MongoDB", "MySQL"] },
   { category: "DevOps & Herramientas", items: ["Docker", "Git", "GitHub", "Linux"] },
-  { category: "Diseño",              items: ["Figma", "UX/UI Design", "Responsive Design"] },
+  { category: "Graficos",              items: ["Figma", "UX/UI Design", "Responsive Design"] },
 ];
 
 const experiencia = [
@@ -36,6 +36,7 @@ const experiencia = [
   },
 ];
 ---
+
 <Layout>
 <main id="about-page" class="bg-white text-black overflow-x-hidden">
 
@@ -44,7 +45,7 @@ const experiencia = [
     <DynamicIsland/>
     <span
       id="about-bg-text"
-      class="absolute left-0 top-1/2 -translate-y-1/2 font-sans-akira text-[18vw] text-neutral-900 opacity-[0.06] select-none leading-none pointer-events-none whitespace-nowrap"
+      class="absolute left-0 top-1/2 -translate-y-1/2 font-sans-akira text-[18vw] text-neutral-200 select-none leading-none pointer-events-none whitespace-nowrap"
     >
       ABOUT ME
     </span>
@@ -73,7 +74,7 @@ const experiencia = [
   <!-- BIO -->
   <section id="about-bio" class="px-6 sm:px-8 md:px-16 py-24 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-16 border-t border-black/10">
     <div id="bio-left" class="opacity-0">
-      <p class="font-sans-akira text-xs uppercase tracking-widest text-gray-400 mb-6">Sobre mí</p>
+      <p class="font-sans-akira text-xs uppercase tracking-widest text-gray-400 mb-6">Sobre mi</p>
       <h2 class="font-sans-akira uppercase text-3xl md:text-4xl leading-tight text-black">
         Construyo experiencias digitales que conectan.
       </h2>
@@ -157,7 +158,7 @@ const experiencia = [
 
               <div class="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-12">
                 <div>
-                  <span class="font-sans-akira text-3xl text-neutral-900 opacity-15 block leading-none">{item.year}</span>
+                  <span class="font-sans-akira text-3xl text-neutral-900 opacity-50 block leading-none">{item.year}</span>
                 </div>
                 <div>
                   <h3 class="font-sans-akira uppercase text-xl md:text-2xl text-black mb-1">{item.rol}</h3>
