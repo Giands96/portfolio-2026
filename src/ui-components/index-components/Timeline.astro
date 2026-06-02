@@ -124,7 +124,7 @@ const trayectoria = [
   const getScrollDistance = () => {
     const tablaHeight = tablaTimeline.offsetHeight;
     const screenHeight = window.innerHeight;
-    return Math.max(0, tablaHeight - screenHeight * 0.9);
+    return Math.max(0, tablaHeight - screenHeight * 0.8);
   };
   gsap.to(tablaTimeline, {
     y: () => -getScrollDistance(), // Aplicamos el movimiento hacia arriba
