@@ -96,6 +96,7 @@ const proyectos: Proyecto[] = [
                 alt={proyecto.title}
                 width={1440}
                 height={1080}
+                sizes="(max-width: 768px) 85vw, 600px"
                 class="w-full h-84 object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
               />
             ) : (
@@ -129,28 +130,8 @@ const proyectos: Proyecto[] = [
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import Lenis from "lenis";
 
   gsap.registerPlugin(ScrollTrigger);
-
-  const lenis = new Lenis({
-    duration: 1.2, // Controla la suavidad del scroll
-    // se una 1 para un scroll lineal, 1.001 para un scroll que se desacelera al final, o cualquier valor entre 0 y 1 para un scroll más suave.
-    // Math.pow es una función matemática que eleva un número a una potencia. En este caso, se utiliza para crear una curva de desaceleración personalizada.
-    // 2, -10 * t significa que el scroll se desacelerará exponencialmente a medida que t (el tiempo) se acerca a 1. 
-    // Esto crea un efecto de desaceleración suave al final del scroll.
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
-
-  // GSAP y Lenis tienen sus propios "relojes" internos para animar.
-  // Estas tres líneas son cruciales para sincronizarlos, de modo que
-  // GSAP sepa exactamente dónde está el scroll de Lenis en cada frame.
-  lenis.on("scroll", ScrollTrigger.update);
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-  gsap.ticker.lagSmoothing(0);
 
   //  slider horizontal gsap
   const track = document.querySelector(".projects-track");

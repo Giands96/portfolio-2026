@@ -41,7 +41,7 @@ const experiencia = [
 <main id="about-page" class="bg-white text-black overflow-x-hidden">
 
   <!-- HERO -->
-  <section id="about-hero" class="relative h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-16 overflow-hidden bg-white">
+  <section id="about-hero" class="relative min-h-[100svh] md:min-h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-[calc(env(safe-area-inset-bottom)+4rem)] md:pb-16 overflow-hidden bg-white">
     <DynamicIsland/>
     <span
       id="about-bg-text"
@@ -189,21 +189,12 @@ const experiencia = [
   </section>
 
 </main>
-<Layout/>
+</Layout>
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import Lenis from "lenis";
 
   gsap.registerPlugin(ScrollTrigger);
-
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-  gsap.ticker.lagSmoothing(0);
 
   // ── Hero entrada ──
   gsap.set("#about-tag",    { y: 20, opacity: 0 });

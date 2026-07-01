@@ -89,24 +89,10 @@ const trayectoria = [
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import Lenis from "lenis";
 
   // Registramr plugin GSAP para reaccionar al scroll
   gsap.registerPlugin(ScrollTrigger);
 
-  // Configurar Lenis para el scroll nativo
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
-
-  // Sincronización entre Lenis y GSAP
-  // Asegura que GSAP sepa exactamente en qué pixel se encuentra Lenis
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-  gsap.ticker.lagSmoothing(0);
   const trayectoriaSection = document.getElementById("timeline");
   const allBoxes = document.querySelectorAll(".timeline-item");
   const boxes = gsap.utils.toArray(allBoxes) as HTMLElement[];

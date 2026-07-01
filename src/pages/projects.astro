@@ -80,10 +80,10 @@ const proyectos: Proyecto[] = [
 ---
 <Layout>
 
-<main id="projects-page" class="bg-[#111111] min-h-screen text-white overflow-x-hidden">
+<main id="projects-page" class="bg-[#111111] min-h-dvh text-white overflow-x-hidden">
 
   <!-- HERO -->
-  <section class="relative h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-16 overflow-hidden">
+  <section class="relative min-h-[100svh] md:min-h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-[calc(env(safe-area-inset-bottom)+4rem)] md:pb-16 overflow-hidden">
     <DynamicIsland/>
     <span
       id="bg-number"
@@ -149,6 +149,7 @@ const proyectos: Proyecto[] = [
                   alt={proyecto.title}
                   width={1440}
                   height={810}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
               ) : (
@@ -200,7 +201,7 @@ const proyectos: Proyecto[] = [
   </section>
 
   <!-- CTA FINAL -->
-  <section id="projects-cta" class="h-[40vh] flex items-center justify-center px-6 border-t border-white/10 opacity-0">
+  <section id="projects-cta" class="min-h-[40svh] flex items-center justify-center px-6 border-t border-white/10 opacity-0">
     <div class="text-center">
       <p class="font-sans-inter italic text-gray-500 mb-4 text-lg">¿Tienes un proyecto en mente?</p>
       <a
@@ -215,22 +216,13 @@ const proyectos: Proyecto[] = [
 
 </main>
 
-<Layout/>
+</Layout>
 
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import Lenis from "lenis";
 
   gsap.registerPlugin(ScrollTrigger);
-
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-  gsap.ticker.lagSmoothing(0);
 
   // ── Hero entrada ──
   gsap.set("#hero-tag",      { y: 20,  opacity: 0 });

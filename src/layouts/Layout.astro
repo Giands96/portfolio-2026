@@ -21,8 +21,30 @@ import "../styles/global.css";
     <slot />
     <script>
       import Lenis from "lenis";
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-      const lenis = new Lenis({ autoRaf: true });
+      gsap.registerPlugin(ScrollTrigger);
+
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      if (!reduceMotion) {
+        const lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+
+        lenis.on("scroll", ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        (window as any).lenis = lenis;
+      }
 
       let mouseX = 0;
       let mouseY = 0;
@@ -70,7 +92,15 @@ import "../styles/global.css";
         requestAnimationFrame(animateCursor);
       }
 
-      animateCursor();
+      if (
+        cursor &&
+        window.matchMedia("(pointer: fine)").matches &&
+        !reduceMotion
+      ) {
+        animateCursor();
+      } else if (cursor) {
+        cursor.style.display = "none";
+      }
     </script>
   </body>
 </html>
@@ -96,5 +126,11 @@ import "../styles/global.css";
     background-color: white;
     mix-blend-mode: difference;
     transition: transform 0.08s ease-out;
+  }
+
+  @media (pointer: coarse) {
+    .cursor-background {
+      display: none;
+    }
   }
 </style>

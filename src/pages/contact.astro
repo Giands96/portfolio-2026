@@ -5,10 +5,10 @@ import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro
 // src/pages/contact.astro  |  componente Contact.astro
 ---
 <Layout>
-<main id="contact-page" class="bg-[#0f0f0f] min-h-screen text-white overflow-x-hidden">
+<main id="contact-page" class="bg-[#0f0f0f] min-h-dvh text-white overflow-x-hidden">
 
   <!-- HERO -->
-  <section class="relative h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-16 overflow-hidden">
+  <section class="relative min-h-[100svh] md:min-h-screen flex flex-col justify-end px-6 sm:px-8 md:px-16 pb-[calc(env(safe-area-inset-bottom)+4rem)] md:pb-16 overflow-hidden">
     <DynamicIsland/>
     <span
       id="contact-bg-text"
@@ -199,17 +199,8 @@ import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import Lenis from "lenis";
 
   gsap.registerPlugin(ScrollTrigger);
-
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-  gsap.ticker.lagSmoothing(0);
 
   // ── Hero entrada ──
   gsap.set("#contact-tag",    { y: 20, opacity: 0 });
