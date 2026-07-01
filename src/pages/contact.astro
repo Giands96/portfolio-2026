@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro";
+import githubSvg from "../assets/github.svg?url";
+import linkedinSvg from "../assets/linkedin.svg?url";
 
 // src/pages/contact.astro  |  componente Contact.astro
 ---
@@ -66,22 +68,38 @@ import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro
       <div>
         <p class="font-sans-inter italic text-gray-500 text-sm mb-6 uppercase tracking-widest">Redes</p>
         <div class="flex flex-col gap-3">
-          {[
-            { name: "GitHub",    url: "https://github.com/" },
-            { name: "LinkedIn",  url: "https://linkedin.com/in/" },
-            { name: "Instagram", url: "https://instagram.com/" },
-          ].map((red) => (
-            <a
-              href={red.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-link group font-sans-akira text-sm uppercase tracking-widest text-gray-500 hover:text-white transition-all duration-300 flex items-center gap-3"
-            >
-              <span class="w-6 h-px bg-gray-700 group-hover:w-12 group-hover:bg-white transition-all duration-300 block"></span>
-              {red.name}
-              <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
-            </a>
-          ))}
+          <a
+            href="https://github.com/Giands96"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link group font-sans-akira text-sm uppercase tracking-widest text-gray-500 hover:text-white transition-all duration-300 flex items-center gap-3"
+          >
+            <span class="w-6 h-px bg-gray-700 group-hover:w-12 group-hover:bg-white transition-all duration-300 block"></span>
+            <img
+              src={githubSvg}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              class="h-5 w-5 opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+            />
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/axel-del-solar-aa97881a3/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link group font-sans-akira text-sm uppercase tracking-widest text-gray-500 hover:text-white transition-all duration-300 flex items-center gap-3"
+          >
+            <span class="w-6 h-px bg-gray-700 group-hover:w-12 group-hover:bg-white transition-all duration-300 block"></span>
+            <img
+              src={linkedinSvg}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              class="h-5 w-5 opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+            />
+            LinkedIn
+          </a>
         </div>
       </div>
     </div>
@@ -206,11 +224,13 @@ import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro
   gsap.set("#contact-tag",    { y: 20, opacity: 0 });
   gsap.set("#contact-title",  { y: 60, opacity: 0 });
   gsap.set("#contact-scroll", {        opacity: 0 });
+  gsap.set(".social-link",    { x: -20, opacity: 0 });
 
   const tl = gsap.timeline({ delay: 0.3 });
   tl.to("#contact-tag",    { y: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, 0);
   tl.to("#contact-title",  { y: 0, opacity: 1, duration: 1.1, ease: "power2.out" }, 0.2);
   tl.to("#contact-scroll", {       opacity: 1, duration: 0.6, ease: "power2.out" }, 0.7);
+  
 
   // Línea scroll animada
   gsap.to("#cscroll-line", { y: 48, duration: 1.5, ease: "power1.inOut", repeat: -1 });
@@ -242,9 +262,9 @@ import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro
         ease: "power2.out",
       });
 
-      gsap.from(".social-link", {
-        x: -20,
-        opacity: 0,
+      gsap.to(".social-link", {
+        x: 0,
+        opacity: 1,
         duration: 0.6,
         stagger: 0.1,
         delay: 0.3,
