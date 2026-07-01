@@ -20,18 +20,15 @@ import Image from "astro/components/Image.astro"
       Full Stack <br class="hidden sm:block" /> Developer
     </h1>
 
-    <p id="subtitle" class="text-[1.35rem] md:text-[1.75rem] mt-6 font-serif italic text-gray-600 opacity-0">
-      UX / UI
-    </p>
   </div>
 
-  <div class="relative z-20 flex justify-center -mt-24 md:-mt-40 pointer-events-none">
+  <div class="relative z-20 flex justify-center -mt-24 md:-mt-32 pointer-events-none">
     <Image
       id="my-photo"
       src={MyPhoto}
       height={800}
       alt="my-photo"
-      class="pointer-events-auto"
+      class="pointer-events-auto opacity-0"
     />
   </div>
 </div>
@@ -93,6 +90,29 @@ import Image from "astro/components/Image.astro"
       });
     },
   });
+
+  gsap.set("#my-photo", { y: 50, opacity: 0 });
+  gsap.to("#my-photo", {
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    delay: 3,
+    ease: "power2.out",
+    onComplete: () => {
+      gsap.to("#my-photo", {
+        y: -50,
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#hero",
+          start: "top top",
+          end: "bottom 50%",
+          scrub: true,
+        },
+      });
+    },
+  });
+
 
   const title = document.querySelector<HTMLElement>("#hero-title");
   gsap.set(title, { y: -50, opacity: 0 });
