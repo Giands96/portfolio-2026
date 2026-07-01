@@ -1,42 +1,20 @@
 ---
 import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro"
 import Timeline from "../ui-components/about-me-components/Timeline.astro"
+import MyPhoto from "../assets/images/profile.webp"
+import Image from "astro/components/Image.astro"
 ---
-
-<section
-  id="hero"
-  class="relative w-full min-h-screen flex items-center bg-white text-black overflow-hidden px-6 sm:px-8 md:px-16 py-20 md:py-0"
->
-  <DynamicIsland/>
-
-  <!-- Foto toggle — entra desde la derecha, anclada al fondo -->
-  <div
-    id="my-person"
-    class="absolute top-50 bottom-0 right-10 w-[260px] md:w-[360px] pointer-events-none z-20"
-  >
-    <div class="relative">
-      <img
-        src="https://i.pinimg.com/736x/0e/60/7f/0e607f9e752a20879bf3540f157d8c3c.jpg"
-        alt="Axel Del Solar"
-        width="500"
-        height="1000"
-        class="w-full object-cover object-top max-h-[88vh]"
-      />
-      <!-- Degradado inferior hacia blanco -->
-      <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-    </div>
-  </div>
-
-  <!-- Contenido principal -->
-  <div class="hero-content w-full container mx-auto flex flex-col text-center md:text-left justify-center">
+  
+<DynamicIsland />
+<div class="hero-content relative top-32 -z-2 w-full min-h-screen container mx-auto flex flex-col text-center justify-center">
+  <div class="relative z-0">
     <p id="hi-im" class="text-[1.75rem] md:text-[2.6rem] italic font-serif text-gray-800 mb-3 opacity-0">
       Hola, Soy Axel
     </p>
-
     <h1
       id="hero-title"
-      class="text-[clamp(2.6rem,9vw,5.5rem)] 
-             md:text-[clamp(5rem,8.5vw,9.8rem)] 
+      class="text-[clamp(2.6rem,6vw,5.5rem)] 
+             md:text-[clamp(5rem,6vw,9.8rem)] 
              font-sans-akira uppercase tracking-[-0.04em] leading-[0.82] opacity-0"
     >
       Full Stack <br class="hidden sm:block" /> Developer
@@ -47,58 +25,22 @@ import Timeline from "../ui-components/about-me-components/Timeline.astro"
     </p>
   </div>
 
-  <!-- Texto decorativo "Hey! estoy aquí :)" — solo desktop -->
-  <div class="absolute top-[45%] hidden md:flex right-10 flex-col items-center gap-2 z-10 pointer-events-none">
-    <span class="font-serif italic text-2xl text-gray-800 text-center leading-tight">
-      Hey! estoy <br /> aquí :)
-    </span>
-    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" class="ml-10 text-gray-800">
-      <path
-        d="M10 10 Q 50 30 80 80"
-        stroke="currentColor"
-        stroke-width="2"
-        fill="none"
-        stroke-linecap="round"
-      />
-      <path
-        d="M65 85 L 80 80 L 85 65"
-        stroke="currentColor"
-        stroke-width="2"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
+  <div class="relative z-20 flex justify-center -mt-24 md:-mt-40 pointer-events-none">
+    <Image
+      id="my-photo"
+      src={MyPhoto}
+      height={800}
+      alt="my-photo"
+      class="pointer-events-auto"
+    />
   </div>
+</div>
 
-  <!-- Div mobile (reservado) -->
-  <div class="md:hidden flex justify-center mt-12">
-    <!-- <img src="..." alt="" width="300" height="800"> -->
-  </div>
-
-  <!-- Botón toggle -->
-  <button
-    id="photo-btn"
-    aria-label="Mostrar foto"
-    class="absolute top-[55%] -right-12 w-24 h-24 bg-[#1a1a1a] rounded-full text-white flex items-center justify-start pl-4 hover:-translate-x-4 transition-transform duration-300 cursor-pointer z-30"
-  >
-    <svg
-      id="photo-btn-icon"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <line x1="19" y1="12" x2="5" y2="12"></line>
-      <polyline points="12 19 5 12 12 5"></polyline>
-    </svg>
-  </button>
-</section>
+<style>
+  #my-photo{
+    mask-image: linear-gradient(to top, transparent, black 15%);
+  }
+</style>
 
 <script>
   import { gsap } from "gsap";
