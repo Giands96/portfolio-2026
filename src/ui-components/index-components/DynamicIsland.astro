@@ -4,15 +4,15 @@ const AboutMe = "./about-me";
 
 <div
   id="dynamic-island"
-  class="absolute top-8 left-1/2 -translate-x-1/2 z-50 flex"
+  class="absolute top-8 left-1/2 -translate-x-1/2 z-50 flex max-w-[calc(100vw-2rem)]"
 >
   <div
     id="dot"
-    class="w-37.5 h-10 rounded-full bg-black transition-all duration-500 ease-in-out overflow-hidden-+"
+    class="w-37.5 h-10 max-w-[calc(100vw-2rem)] rounded-full bg-black transition-all duration-500 ease-in-out overflow-hidden"
   >
     <div
       id="links"
-      class="hover:w-full h-full flex items-center justify-center gap-6 px-4 opacity-0 transition-opacity duration-300"
+      class="h-full flex items-center justify-center gap-3 px-3 text-[0.65rem] sm:gap-6 sm:px-4 sm:text-base opacity-0 pointer-events-none transition-opacity duration-300"
     >
       <a
         class="text-white font-sans-akira hover:text-neutral-400 whitespace-nowrap"
@@ -39,9 +39,18 @@ const AboutMe = "./about-me";
 
   // Dynamic Island
   const island = document.getElementById("dot");
+  const links = document.getElementById("links");
+  const mobileQuery = window.matchMedia("(max-width: 639px)");
+  const touchQuery = window.matchMedia("(pointer: coarse)");
+  let isOpen = false;
+
+  const getClosedWidth = () => Math.min(250, window.innerWidth - 32);
+  const getOpenWidth = () =>
+    mobileQuery.matches ? window.innerWidth - 32 : 550;
 
   gsap.set("#dot", {
     transformOrigin: "center center",
+    width: getClosedWidth(),
   });
 
   const islandTl = gsap.timeline({ delay: 0.2 });
@@ -62,7 +71,7 @@ const AboutMe = "./about-me";
         },
       )
       .to("#dot", {
-        width: 250,
+        width: getClosedWidth(),
         duration: 0.5,
         ease: "power2.inOut",
       })
@@ -75,16 +84,17 @@ const AboutMe = "./about-me";
       scaleY: 1,
       y: 0,
       opacity: 1,
-      width: 250,
+      width: getClosedWidth(),
     });
   }
 
   function openIsland() {
+    isOpen = true;
     gsap.killTweensOf("#dot");
     gsap.killTweensOf("#links");
 
     gsap.to("#dot", {
-      width: 550,
+      width: getOpenWidth(),
       duration: 0.25,
       ease: "power2.out",
     });
@@ -99,6 +109,7 @@ const AboutMe = "./about-me";
   }
 
   function closeIsland() {
+    isOpen = false;
     gsap.killTweensOf("#dot");
     gsap.killTweensOf("#links");
 
@@ -110,7 +121,7 @@ const AboutMe = "./about-me";
     });
 
     gsap.to("#dot", {
-      width: 250,
+      width: getClosedWidth(),
       duration: 0.2,
       delay: 0.05,
       ease: "power2.out",
@@ -119,4 +130,23 @@ const AboutMe = "./about-me";
 
   island?.addEventListener("mouseenter", openIsland);
   island?.addEventListener("mouseleave", closeIsland);
+
+  island?.addEventListener("click", (event) => {
+    if (!touchQuery.matches) return;
+    if ((event.target as HTMLElement).closest("a")) return;
+
+    if (isOpen) {
+      closeIsland();
+    } else {
+      openIsland();
+    }
+  });
+
+  links?.addEventListener("click", (event) => {
+    if ((event.target as HTMLElement).closest("a")) closeIsland();
+  });
+
+  window.addEventListener("resize", () => {
+    gsap.set("#dot", { width: isOpen ? getOpenWidth() : getClosedWidth() });
+  });
 </script>

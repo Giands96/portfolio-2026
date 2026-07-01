@@ -1,40 +1,48 @@
 ---
-import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro"
-import Timeline from "../ui-components/about-me-components/Timeline.astro"
-import MyPhoto from "../assets/images/profile.webp"
-import Image from "astro/components/Image.astro"
+import DynamicIsland from "../ui-components/index-components/DynamicIsland.astro";
+import Timeline from "../ui-components/about-me-components/Timeline.astro";
+import MyPhoto from "../assets/images/profile.webp";
+import Image from "astro/components/Image.astro";
 ---
-  
+
 <DynamicIsland />
-<div class="hero-content relative top-32 -z-2 w-full min-h-screen container mx-auto flex flex-col text-center justify-center">
+<div
+  class="hero-content relative top-32 -z-2 w-full min-h-screen container mx-auto flex flex-col text-center justify-center"
+>
   <div class="relative z-0">
-    <p id="hi-im" class="text-[1.75rem] md:text-[2.6rem] italic font-serif text-gray-800 mb-3 opacity-0">
+    <p
+      id="hi-im"
+      class="text-[1.75rem] md:text-[2.6rem] italic font-serif text-gray-800 mb-3 opacity-0"
+    >
       Hola, Soy Axel
     </p>
     <h1
       id="hero-title"
-      class="text-[clamp(2.6rem,6vw,5.5rem)] 
-             md:text-[clamp(5rem,6vw,9.8rem)] 
+      class="text-[clamp(2.6rem,6vw,5.5rem)]
+             md:text-[clamp(5rem,6vw,9.8rem)]
              font-sans-akira uppercase tracking-[-0.04em] leading-[0.82] opacity-0"
     >
       Full Stack <br class="hidden sm:block" /> Developer
     </h1>
-
   </div>
 
-  <div class="relative z-20 flex justify-center -mt-24 md:-mt-32 pointer-events-none">
+  <div
+    class="relative z-20 flex justify-center -mt-24 md:-mt-32 pointer-events-none"
+  >
     <Image
       id="my-photo"
       src={MyPhoto}
       height={800}
       alt="my-photo"
-      class="pointer-events-auto opacity-0"
+      loading="eager"
+      fetchpriority="high"
+      class="pointer-events-auto opacity-0 max-w-full h-auto"
     />
   </div>
 </div>
 
 <style>
-  #my-photo{
+  #my-photo {
     mask-image: linear-gradient(to top, transparent, black 15%);
   }
 </style>
@@ -113,7 +121,6 @@ import Image from "astro/components/Image.astro"
     },
   });
 
-
   const title = document.querySelector<HTMLElement>("#hero-title");
   gsap.set(title, { y: -50, opacity: 0 });
   gsap.to(title, {
@@ -140,8 +147,8 @@ import Image from "astro/components/Image.astro"
   // ── Toggle foto ──
 
   const photo = document.querySelector<HTMLElement>("#my-person");
-  const btn   = document.querySelector<HTMLButtonElement>("#photo-btn");
-  const icon  = document.querySelector<SVGElement>("#photo-btn-icon");
+  const btn = document.querySelector<HTMLButtonElement>("#photo-btn");
+  const icon = document.querySelector<SVGElement>("#photo-btn-icon");
 
   // Estado inicial: fuera de pantalla a la derecha
   gsap.set(photo, { x: "100%", opacity: 0 });

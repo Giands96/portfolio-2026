@@ -105,16 +105,16 @@ const proyectos: Proyecto[] = [
             )}
           </a>
 
-          <div class="flex flex-col justify-between h-[calc(100%-400px)]">
+          <div class="flex min-h-0 flex-1 flex-col">
             <h3 class="text-2xl uppercase mb-3 font-sans-akira mt-3 overflow-hidden text-ellipsis whitespace-nowrap">
               {proyecto.title}
             </h3>
 
-            <p class="text-gray-400 text-md md:text-lg leading-relaxed mb-4 min-h-[calc(100%-100px)] font-sans-inter text-ellipsis overflow-hidden line-clamp-3 md:line-clamp-5">
+            <p class="text-gray-400 text-md md:text-lg leading-relaxed mb-4 font-sans-inter overflow-hidden line-clamp-3 md:line-clamp-5">
               {proyecto.description}
             </p>
 
-            <div class="flex gap-3 text-gray-500">
+            <div class="flex gap-3 text-gray-500 mt-auto">
               {proyecto.url_svg.map((svg) => (
                 <img src={svg.src} alt="Tecnología" class="w-8 h-8" />
               ))}
