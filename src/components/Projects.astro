@@ -18,6 +18,7 @@ import Wasiq from "../assets/images/Wasiq.webp";
 import ADStudio from "../assets/images/adstudio.webp";
 import portfolio from "../assets/images/portfolio.webp";
 import mernChat from "../assets/images/mernchat.webp";
+import aroma from "../assets/images/aroma.webp";
 
 interface Proyecto {
   id: string;
@@ -65,6 +66,15 @@ const proyectos: Proyecto[] = [
       "Portafolio personal desarrollado con Astro y Tailwind CSS, diseñado para mostrar proyectos y habilidades de manera elegante y responsiva, con animaciones suaves y una experiencia de usuario optimizada.",
     url_svg: [astro, tailwind],
   },
+  {
+    id: "05",
+    title: "Aroma - Velas y Recuerdos",
+    url: "https://aroma-web-nine.vercel.app/home",
+    imagen: aroma,
+    description:
+      "Sitio web para una tienda de velas y recuerdos, desarrollado con NextJS y Tailwind CSS, ofreciendo una experiencia de cotizado mediante WhatsApp, con un diseño visualmente agradable y funcional.",
+    url_svg: [nextjs, tailwind,typescript, docker, postgresql],
+  }
   
 ];
 ---
